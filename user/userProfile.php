@@ -6,7 +6,8 @@ if (!isset($_SESSION["STUDENT"]) && !isset($_SESSION["ADM"]) && !isset($_SESSION
     header("Location: login.php");
     exit();
 }
-
+$loc = "../";
+require_once "{$loc}components/navbar.php";
 require_once '../components/db_connect.php';
 
 $user_id = $_SESSION["STUDENT"] ?? $_SESSION["ADM"]  ?? $_SESSION["TUTOR"];
