@@ -12,8 +12,8 @@
         //
     }
 
-    $first_name = $last_name = $email = $dateOfBirth = ""; // define variables and set them to empty string
-    $fnameError = $lnameError = $emailError = $dateofbirthError = $passError = ""; // define variables that will hold error messages later, for now empty string 
+    $first_name = $last_name = $email = $profile_info = $phone_number = $dateOfBirth = ""; // define variables and set them to empty string
+    $fnameError = $lnameError = $emailError = $dateofbirthError = $passError = $phone_numberError = $profile_infoError = ""; // define variables that will hold error messages later, for now empty string 
 
     if(isset($_POST["register"])) {
 
@@ -22,7 +22,9 @@
         $first_name = clean($_POST["first_name"]);
         $last_name = clean($_POST["last_name"]);
         $dateOfBirth = clean($_POST["dateOfBirth"]);
-         
+        $profile_info = clean($_POST["profile_info"]);
+        $phone_number = clean($_POST["phone_number"]);
+        
         // initialize error to be false
 
         $error = false;
@@ -77,6 +79,8 @@
             $dateofbirthError = "Date of Birth cannot be empty";
         }
 
+        // simple validation for the password
+
         if(empty($password)){
             $error = true;
             $passError = "Password cannot be empty.";
@@ -84,6 +88,13 @@
         elseif(strlen($password) < 6){
             $error = true;
             $passError = "Password must be at least 6 chars long.";
+        }
+
+        // simple validation for the phone number
+
+        if(empty($phone_number)){
+            $error = true;
+            $phone_numberError = "Phone number cannot be empty.";
         }
 
         // do the picture last
@@ -95,8 +106,8 @@
             $password = password_hash ($password, PASSWORD_DEFAULT);
             //$password = hash("sha256", $password);
 
-            $sql = "INSERT INTO `users`(`email`, `passwd`, `firstName`, `lastName`, `dateOfBirth`, `image`) 
-                    VALUES ('$email', '$password', '$first_name', '$last_name', '$dateOfBirth', '$picture[0]')";
+            $sql = "INSERT INTO `users`(`email`, `passwd`, `firstName`, `lastName`, `dateOfBirth`, `image`, `phone_number`, `profile_info`) 
+                    VALUES ('$email', '$password', '$first_name', '$last_name', '$dateOfBirth', '$picture[0]', '$phone_number', '$profile_info')";
 
             $result = mysqli_query($conn, $sql);
 
@@ -145,6 +156,16 @@
                     <label for="dateOfBirth" class="form-label">Date Of Birth</label>
                     <input type="date" class="form-control" id="dateofbirth" name="dateOfBirth" placeholder="DateOfBirth" value="<?= $dateOfBirth ?>">
                     <span class="text-danger"><?= $dateofbirthError ?></span>
+                </div>
+                <div class="mb-3">
+                    <label for="pinfo" class="form-label">Information</label>
+                    <textarea name="profile_info" id="pinfo" cols="50" rows="5"></textarea>
+                    <span class="text-danger"><?= $profile_infoError ?></span>
+                </div>
+                <div class="mb-3">
+                    <label for="pnumber" class="form-label">Phone Number</label>
+                    <input type="text" class="form-control" id="pnumber" name="phone_number" placeholder="Phone Number" value="<?= $phone_number ?>">
+                    <span class="text-danger"><?= $phone_numberError ?></span>
                 </div>
                 <div class="mb-3">
                     <label for="picture" class="form-label">Profile picture</label>
