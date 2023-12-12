@@ -39,30 +39,30 @@ mysqli_close($conn);
     <style>
         .profile-img {
             max-width: 100%;
-            height: 500px; 
+            height: 550px; 
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             object-fit: cover;
         }
         .profile-section {
             background-color: #fff;
-            height: 500px;
+            height: 550px;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             min-height: 300px; 
-            margin-top: 97px;
+            margin-top: 72px;
         }
     </style>
 </head>
 <body>
 
-<div class="container mt-5 pt-2">
+<div class="container mt-3 pt-2">
         <div class="row">
            
-            <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12  mb-4 d-flex justify-content-center">
+            <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12  mb-2 d-flex justify-content-center">
                 <div>
-                    <h1 class="fw-bold mb-5 text-center">Welcome, <?= $user["firstName"] ?>.</h1>
+                    <h1 class="fw-bold mb-4 text-center">Welcome, <?= $user["firstName"] ?>.</h1>
                     <img src="../assets/<?= $user['image'] ?>" alt="Profile Image" class="profile-img">
                 </div>
             </div>
