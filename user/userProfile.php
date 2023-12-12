@@ -68,7 +68,7 @@ mysqli_close($conn);
             </div>
             <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12  ">
                 <div class="profile-section ">
-                    <div class="pb-5 ">
+                    <div class="pb-3 ">
                         <p><h2>Thank you, <?= $user["firstName"] ?>!</h2></p>
                         <p class="px-3 pt-4">Welcome to our university tutoring community! We're thrilled to have you on board as a valuable member. Your profile information is provided below, and you can update it as needed. If you have any questions or concerns, feel free to reach out. Enjoy your time and academic journey with us!</p>
                     </div>
@@ -77,8 +77,11 @@ mysqli_close($conn);
                         <li><strong><i class="ri-user-line"></i> First Name:</strong> <?= $user["firstName"] ?></li>
                         <li><strong> <i class="ri-user-line"></i> Last Name:</strong> <?= $user["lastName"] ?></li>
                         <li><strong><i class="ri-mail-line"></i> Email:</strong> <?= $user["email"] ?></li>
-                        <li><strong><i class="ri-calendar-line"></i> Date of Birth</strong> <?= $user["dateOfBirth"] ?></li>
+                        <li><strong><i class="ri-calendar-line"></i> Date of Birth:</strong> <?= $user["dateOfBirth"] ?></li>
+                        <li><strong><i class="ri-phone-line"></i> Phone Number:</strong> <?= $user["phone_number"] ?></li>
                     </ul>   
+                    <h3>Information</h3>
+                    <p><i class="ri-information-line"></i> <?= $user["profile_info"] ?></p>
                 </div>
             </div>
         </div>
