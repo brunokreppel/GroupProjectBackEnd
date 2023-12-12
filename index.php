@@ -1,6 +1,7 @@
 <?php 
-
-
+session_start();
+$loc = "";
+require_once "components/navbar.php";
 
 ?>
 <!DOCTYPE html>
