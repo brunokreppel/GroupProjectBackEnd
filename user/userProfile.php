@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-$_SESSION["STUDENT"] = '1';
 
 if (!isset($_SESSION["STUDENT"]) && !isset($_SESSION["ADM"]) && !isset($_SESSION["TUTOR"])) {
     header("Location: login.php");
