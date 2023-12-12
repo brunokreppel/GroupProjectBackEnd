@@ -28,7 +28,7 @@ echo "
         <div class='collapse navbar-collapse' id='navbarNav'>
             <ul class='navbar-nav'>
                 <li class='nav-item'>
-                    <a class='nav-link mb-1' href='{$loc}index.php'>Home</a>
+                    <a class='nav-link' href='{$loc}index.php'>Home</a>
                 </li>
             </ul>";
 
