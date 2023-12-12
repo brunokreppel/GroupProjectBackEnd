@@ -61,21 +61,21 @@
                     $_SESSION["STUDENT"] = $row["id"];
                     // redirect to another page because the session for the STUDENT has been created
                     //
-                    // <--------- INSERT MISSING REDIRECT e.g. header("Location: ../index.php");
+                    header("Location: userProfile.php");
                     //
                 }
                 elseif($row["status"] === "ADM"){
                     $_SESSION["ADM"] = $row["id"];
                     // redirect to another page because the session for the ADMIN has been created
                     //
-                    // <--------- INSERT MISSING REDIRECT e.g. header("Location: ../index.php");
+                    header("Location: userProfile.php");
                     //
                 }
                 elseif($row["status"] === "TUTOR"){
                     $_SESSION["TUTOR"] = $row["id"];
                     // redirect to another page because the session for the TUTOR has been created
                     //
-                    // <--------- INSERT MISSING REDIRECT e.g. header("Location: ../index.php");
+                    header("Location: userProfile.php");
                     //
                 }
 
