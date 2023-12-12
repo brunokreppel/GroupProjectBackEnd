@@ -19,7 +19,7 @@
        if($message == "Ok"){
            $ext = strtolower(pathinfo($image["name"],PATHINFO_EXTENSION)); 
            $imageName = uniqid(""). "." . $ext; 
-           $destination = "assets/{$imageName}"; 
+           $destination = "../assets/{$imageName}"; 
            if($source == "courses"){
                $destination = "../assets/{$imageName}"; 
            }
