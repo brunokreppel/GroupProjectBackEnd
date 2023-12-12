@@ -1,0 +1,27 @@
+
+:root {
+    --primary-blue: #002147;
+    --secondary-blue: #000020;
+    --primary-white: #fefefe; 
+    --secondary-white: #f8f8f8;
+    --accent-color: #800e13;
+    --text-color: #000;
+    ;
+  }
+  *{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  body{
+    background-color: var(--primary-white);
+  }
+
+  
+  
+
+
+
+
+
+

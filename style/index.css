@@ -1,0 +1,61 @@
+.Cstm_h1{
+    color: var(--primary-blue);
+  }
+
+  .about_wrapper {
+    background-color: var(--primary-white);
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 50px; 
+  }
+  .services_wrapper{
+    background-color: var(--secondary-white);
+    height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+
+  .about_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+  }
+
+  .services_container{
+    height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .services_card{
+    border: 1px solid black;
+    width: 300px;
+    height: 500px;
+  }
+
+  .uni_wrapper{
+    background-color: var(--primary-white);
+    height: 30dvh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .tutor_wrapper{
+    background-color: var(--primary-white);
+    height: 40dvh;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+
+  }
+
+  .review_wrapper{
+    background-color: var(--primary-white);
+    height: 30dvh;
+    border-bottom: 1px solid black;
+  }
