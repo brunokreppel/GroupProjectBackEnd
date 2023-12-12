@@ -1,0 +1,39 @@
+name: Emily Brown
+email: emily_brown@mail.com
+pass: emily_brown123;
+
+*************************
+
+name: David Lee
+email: david_lee@mail.com
+pass: david_lee123;
+
+*************************
+
+name: John McCray
+email: john_McCray@mail.com
+pass: john_McCray123;
+
+*************************
+
+name: Sara Johnson
+email: sara_johnson@mail.com
+pass: sara_johnson123;
+
+*************************
+
+name: Michael Smith
+email: michael_smith@mail.com
+pass: michael_smith123;
+
+*************************
+
+name: Sophia Garcia
+email: sophia_garcia@mail.com
+pass: sophia_garcia123;
+
+*************************
+
+name: Robert Martinez
+email: robert_martinez@mail.com
+pass: robert_martinez123;
