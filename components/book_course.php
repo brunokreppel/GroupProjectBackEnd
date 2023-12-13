@@ -10,6 +10,9 @@ if(isset($_POST["BookCourse"])) {
     $error=false;
 
     $user_id = $_SESSION["STUDENT"];
+
+    // course_id comes probably from the $_GET
+    
     $course_id = 1;
 
     // insert new record into booking with course+user
