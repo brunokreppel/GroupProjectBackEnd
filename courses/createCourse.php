@@ -2,17 +2,40 @@
 session_start();
 require_once '../components/db_Connect.php';
 require_once '../components/file_upload.php';
+require_once '../components/clean.php';
 $loc = "../";
 require_once "../components/navbar.php";
 
+
+if(isset($_SESSION["ADM"]) || isset($_SESSION["TUTOR"])){
+   
+    // Function to validate date format
+function validateDate($date)
+{
+    $d = DateTime::createFromFormat('Y-m-d', $date);
+    return $d && $d->format('Y-m-d') === $date;
+}
+
 if (isset($_POST["create"])) {
-    $fromDate = $_POST["fromDate"];
-    $ToDate = $_POST["ToDate"];
-    $price = $_POST["price"];
+    $fromDate = clean($_POST["fromDate"]);
+    $ToDate = clean($_POST["ToDate"]);
+    $price = clean($_POST["price"]);
     $image = fileUpload($_FILES["image"], "courses");
-    $subjectId = $_POST["subjectId"];
-    $universityId = $_POST["universityId"];
-    $tutorId = $_POST["tutorId"];
+    $subjectId = clean($_POST["subjectId"]);
+    $universityId = clean($_POST["universityId"]);
+    $tutorId = clean($_POST["tutorId"]);
+
+    // Validate date format
+    if (!validateDate($fromDate) || !validateDate($ToDate)) {
+        echo "Invalid date format";
+        return;
+    }
+
+    // Validate price
+    if (!is_numeric($price) || $price <= 0) {
+        echo "Invalid price";
+        return;
+    }
 
     $sql = "INSERT INTO course (fk_subject_id, fk_university_id, fk_tutor_id, fromDate, ToDate, price, `image`)
     VALUES ($subjectId, $universityId, $tutorId, '$fromDate', '$ToDate', $price, '$image[0]');";
@@ -23,8 +46,18 @@ if (isset($_POST["create"])) {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
 
-    // Close connection
 }
+
+
+ }else{
+
+    header("Location: ../index.php");
+    die();
+
+
+ }
+    
+
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +71,6 @@ if (isset($_POST["create"])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" crossorigin="">
     <style>
-        /* Custom styling for form elements */
         .form-group {
             margin-bottom: 1rem;
         }

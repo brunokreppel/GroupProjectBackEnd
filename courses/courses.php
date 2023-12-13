@@ -61,7 +61,7 @@ if ($result) {
                 <div class='d-flex justify-content-between align-items-center'>
                     <div class='btn-group'>
                         <a href='courseDetails.php?id={$row['course_id']}' class='btn-link text-decoration-none text-reset'><button type='button' class='btn btn-sm btn-outline-secondary'>Details</button></a>
-                        <button type='button' class='btn btn-sm btn-outline-secondary'>Edit</button>
+                        <a href='updateCourse.php?id={$row['course_id']}' class='btn-link text-decoration-none text-reset'><button type='button' class='btn btn-sm btn-outline-secondary'>Update</button></a>
                     </div>
                     <small class='text-body-secondary'>" . date('F j, Y', strtotime($row['fromDate'])) . "</small>
                 <small class='text-body-secondary'>" . date('F j, Y', strtotime($row['ToDate'])) . "</small>

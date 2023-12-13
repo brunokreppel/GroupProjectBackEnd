@@ -30,7 +30,20 @@ echo "
                 <li class='nav-item'>
                     <a class='nav-link' href='{$loc}index.php'>Home</a>
                 </li>
-            </ul>";
+                <li class='nav-item'>
+                    <a class='nav-link' href='{$loc}courses/courses.php'>Courses</a>
+                </li>
+                ";
+if (isset($_SESSION["STUDENT"]) || isset($_SESSION["ADM"])){
+    echo "
+    <li class='nav-item'>
+<a class='nav-link' href='{$loc}courses/createCourse.php'>Create-Course</a>
+</li>
+            </ul>
+    ";
+}
+
+
 
 // Check if there is an active session
 if (isset($_SESSION["STUDENT"]) || isset($_SESSION["ADM"]) || isset($_SESSION["TUTOR"])) {
