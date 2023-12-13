@@ -1,16 +1,21 @@
 <?php
 
-// user_id should come from the $_SESSION["STUDENT"], course_id should come from the selected course
+session_start();
+require_once 'db_connect.php';
 
-function book_course ($user_id, $course_id) {
+$bcError ="";
 
-    require_once 'db_connect.php';
+if(isset($_POST["BookCourse"])) {
+
     $error=false;
 
+    $user_id = $_SESSION["STUDENT"];
+    $course_id = 1;
 
     // insert new record into booking with course+user
 
     $sql="INSERT INTO `booking`(`fk_course_id`, `user_id`) VALUES ('$course_id','$user_id')";
+    
     $result = mysqli_query($conn, $sql);
 
     if(!$result){
@@ -18,7 +23,9 @@ function book_course ($user_id, $course_id) {
         $error=true;
     }
     if (!$error) {
-        $sql="SELECT `id` FROM `booking` WHERE `fk_course_id`= `$course_id` AND `user_id`= `$user_id`";
+
+        $sql="SELECT `id` FROM `booking` WHERE `fk_course_id`='$course_id' AND `user_id`='$user_id'";
+
         $result = mysqli_query($conn, $sql);
         if (!$result) {
             $bcError ="sql-stmnt: ".$sql." went very wrong";
@@ -28,18 +35,24 @@ function book_course ($user_id, $course_id) {
             $row = mysqli_fetch_assoc($result);
             $booking_id = $row["id"];
             $sql="INSERT INTO `users_booking`(`fk_user_id`, `fk_booking_id`) VALUES ('$user_id','$booking_id')";
+
             $result = mysqli_query($conn, $sql);
             if (!$result) {
                 $bcError ="sql-stmnt: ".$sql." went very wrong";
                 $error=true;
             
             }
+
+            echo "
+            <div class='alert alert-success' role='alert'>
+                Booking created!
+            </div>";
         }
 
     }
     mysqli_close($conn);
-    return $error;
 }
+
 
 ?>
 
@@ -65,7 +78,8 @@ function book_course ($user_id, $course_id) {
     <div class="container">
         <h1 class="text-center">book course</h1>
         <form method="post" autocomplete="off" enctype="multipart/form-data">
-            <button name="Book Course" type="submit" class="btn btn-primary">Book Course</button>
+            <button name="BookCourse" type="submit" class="btn btn-primary">Book Course</button>
+            <span class="text-danger"><?= $bcError ?></span>
         </form>
     </div>
 
