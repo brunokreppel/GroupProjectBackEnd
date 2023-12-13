@@ -8,6 +8,7 @@
        // redirect to another page because the session has been already created
         //
         // <--------- INSERT MISSING REDIRECT e.g. header("Location: ../index.php");
+        header("Location: ../index.php");
         //
     }
 
