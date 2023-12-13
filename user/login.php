@@ -49,9 +49,10 @@
                     }
             }
             else{
+                $error=true;
                 echo "
                 <div class='alert alert-danger' role='alert'>
-                    Something went very wrong when trying to find a unique user for the email in the database!
+                    No such user exists
                 </div>";
             }
         }
