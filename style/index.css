@@ -1,3 +1,7 @@
+  
+  
+*{font-family: 'Bai Jamjuree', sans-serif;}
+
 .Cstm_h1{
     color: var(--primary-blue);
   }
@@ -11,7 +15,7 @@
   }
   .services_wrapper{
     background-color: var(--secondary-white);
-    height: 100dvh;
+    height: 70dvh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,44 +26,125 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     border: 1px solid black;
   }
 
   .services_container{
-    height: 100dvh;
+    height: 90dvh;
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
   .services_card{
-    border: 1px solid black;
     width: 300px;
-    height: 500px;
   }
+  
 
   .uni_wrapper{
-    background-color: var(--primary-white);
-    height: 30dvh;
+    background-color: var(--secondary-white);
+    height: 250px;
+   
+  }
+  .uni_flex{
     display: flex;
     justify-content: space-around;
     align-items: center;
   }
-
-  .tutor_wrapper{
-    background-color: var(--primary-white);
-    height: 40dvh;
-    border-bottom: 1px solid black;
-    border-top: 1px solid black;
-    /* position: relative; */
+  .uni_wrapper img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
   }
+
+  
 
   .review_wrapper{
     background-color: var(--primary-white);
-    height: 30dvh;
-    border-bottom: 1px solid black;
+    height: 400px;
+  }
+
+
+  .swiper {
+    width: 100%;
+    height: 400px;
+    background-color: var(--primary-white);
   }
 
 
 
-    
+.swiperGrid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  align-items: center;
+  text-align: center;
+  font-size: 18px;
+  margin: 0 auto;
+}
+
+.swiperImgContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  position: relative;
+
+}
+
+.carouselImg {
+  height: 300px;
+  width: 300px;
+  border-radius: 50%;
+  object-fit: cover;
+  position: absolute;
+  left: 50%;
+}
+
+.carousel_text {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: start;
+  flex: 1; 
+  height: 300px;
+
+}
+
+.carousel_text a {
+  text-decoration: none;
+  color: black;
+  width: 100%;
+
+}
+
+.swiper-button-next,
+.swiper-button-prev
+{
+    color: black !important;
+}
+.swiper-pagination-bullet{
+background:black !important ;
+}
+@media (max-width: 900px) {
+
+
+  .carousel_text{
+    font-size: 12px;
+    height: 150px;
+
+  }
+
+  .carouselImg {
+    height: 150px;
+    width: 150px;
+   
+  }
+ 
+ 
+  
+  
+}
