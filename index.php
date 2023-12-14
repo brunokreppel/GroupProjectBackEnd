@@ -5,7 +5,7 @@ require_once "components/navbar.php";
 require_once 'components/db_connect.php';
 
 
-$sql = "SELECT * FROM `users`";
+$sql = "SELECT * FROM `users` WHERE `status` = 'TUTOR'";
 $result = mysqli_query($conn, $sql);
 $tutors = "";
 
