@@ -6,59 +6,62 @@ require_once '../components/clean.php';
 $loc = "../";
 require_once "../components/navbar.php";
 
+if (isset($_SESSION["ADM"]) || isset($_SESSION["TUTOR"])) {
 
-if(isset($_SESSION["ADM"]) || isset($_SESSION["TUTOR"])){
-   
-    // Function to validate date format
-function validateDate($date)
-{
-    $d = DateTime::createFromFormat('Y-m-d', $date);
-    return $d && $d->format('Y-m-d') === $date;
-}
-
-if (isset($_POST["create"])) {
-    $fromDate = clean($_POST["fromDate"]);
-    $ToDate = clean($_POST["ToDate"]);
-    $price = clean($_POST["price"]);
-    $image = fileUpload($_FILES["image"], "courses");
-    $subjectId = clean($_POST["subjectId"]);
-    $universityId = clean($_POST["universityId"]);
-    $tutorId = clean($_POST["tutorId"]);
-
-    // Validate date format
-    if (!validateDate($fromDate) || !validateDate($ToDate)) {
-        echo "Invalid date format";
-        return;
-    }
-
-    // Validate price
-    if (!is_numeric($price) || $price <= 0) {
-        echo "Invalid price";
-        return;
-    }
-
-    $sql = "INSERT INTO course (fk_subject_id, fk_university_id, fk_tutor_id, fromDate, ToDate, price, `image`)
-    VALUES ($subjectId, $universityId, $tutorId, '$fromDate', '$ToDate', $price, '$image[0]');";
-
-    if (mysqli_query($conn, $sql)) {
-        echo "Record added successfully";
-    } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-    }
-
-}
-
-
- }else{
-
-    header("Location: ../index.php");
-    die();
-
-
- }
+     // Predefined empty variables
+     $fromDate= $toDate = $price = $image = $subjectId = $universityId = $tutorId = "";
+     $dateError = $priceError = "";
     
 
+    function validateDate($date)
+    {
+        $d = DateTime::createFromFormat('Y-m-d', $date);
+        return $d && $d->format('Y-m-d') === $date;
+    }
+
+   
+
+    if (isset($_POST["create"])) {
+        $fromDate = clean($_POST["fromDate"]);
+        $toDate = clean($_POST["ToDate"]);
+        $price = clean($_POST["price"]);
+        $image = fileUpload($_FILES["image"], "courses");
+        $subjectId = clean($_POST["subjectId"]);
+        $universityId = clean($_POST["universityId"]);
+        $tutorId = clean($_POST["tutorId"]);
+
+        $error = false;
+
+        // Validate date format
+        if (!validateDate($fromDate) || !validateDate($toDate)) {
+            $error = true;
+            $dateError = "Date must be in the right format.";
+        }
+
+        // Validate price
+        if (!is_numeric($price) || $price <= 0) {
+            $error = true;
+            $priceError = "Price must be a positive Number.";
+        }
+
+        if ($error === false) {
+            $sql = "INSERT INTO course (fk_subject_id, fk_university_id, fk_tutor_id, fromDate, ToDate, price, `image`)
+                    VALUES ($subjectId, $universityId, $tutorId, '$fromDate', '$toDate', $price, '$image[0]')";
+
+            if (mysqli_query($conn, $sql)) {
+                echo "Record added successfully";
+            } else {
+                echo "Error adding record: " . mysqli_error($conn);
+            }
+        }
+    }
+} else {
+    header("Location: ../index.php");
+    die();
+}
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -97,16 +100,19 @@ if (isset($_POST["create"])) {
         <div class="form-group">
             <label for="fromDate" class="form-label">From Date:</label>
             <input type="datetime-local" name="fromDate" class="form-control" required>
+            <?= $dateError ?>
         </div>
 
         <div class="form-group">
             <label for="ToDate" class="form-label">To Date:</label>
             <input type="datetime-local" name="ToDate" class="form-control" required>
+            <?= $dateError ?>
         </div>
 
         <div class="form-group">
             <label for="price" class="form-label">Price:</label>
             <input type="number" name="price" class="form-control" required>
+            <?= $priceError ?>
         </div>
 
         <div class="form-group">

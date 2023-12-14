@@ -34,7 +34,7 @@ echo "
                     <a class='nav-link' href='{$loc}courses/courses.php'>Courses</a>
                 </li>
                 ";
-if (isset($_SESSION["STUDENT"]) || isset($_SESSION["ADM"])){
+if (isset($_SESSION["TUTOR"]) || isset($_SESSION["ADM"])){
     echo "
     <li class='nav-item'>
 <a class='nav-link' href='{$loc}courses/createCourse.php'>Create-Course</a>

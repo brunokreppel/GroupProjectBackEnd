@@ -5,8 +5,12 @@ require_once '../components/file_upload.php';
 $loc = "../";
 require_once "../components/navbar.php";
 
+if (isset($_SESSION["ADM"]) || isset($_SESSION["TUTOR"])) {
 // Initialize variables
-$id = $fromDate = $ToDate = $price = $subjectId = $universityId = $tutorId = "";
+$id = $fromDate = $toDate = $price = $subjectId = $universityId = $tutorId = "";
+$dateError = $priceError = "";
+$error = false;
+
 
 // Fetch the course details based on the passed id
 if (isset($_GET["id"])) {
@@ -40,6 +44,11 @@ if (isset($_POST["update"])) {
     $universityId = $_POST["universityId"];
     $tutorId = $_POST["tutorId"];
 
+
+
+
+
+
     $sql = "UPDATE course SET 
             fk_subject_id = $subjectId,
             fk_university_id = $universityId,
@@ -55,6 +64,14 @@ if (isset($_POST["update"])) {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
 }
+
+}else{
+    header("Location: ../index.php");
+    die();
+}
+
+
+
 ?>
 
 <!DOCTYPE html>
