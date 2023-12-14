@@ -2,6 +2,7 @@
    
    function fileUpload($image, $source = 'user') {
         $message = "";
+        $imageName = "";
 
         if ($image["error"] == 4) { 
             $imageName = "User-avatar.svg.png";
