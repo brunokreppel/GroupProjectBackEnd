@@ -4,9 +4,69 @@ require_once '../components/db_Connect.php';
 $loc = "../";
 require_once "../components/navbar.php";
 
-if (isset($_GET["id"]) && !empty($_GET["id"])) {
-
+if (!isset($_GET["id"]) || empty($_GET["id"])) {
+    //
+    // no id for course provided
+    //
+    header("Location: courses.php");
+    die();
 }
+
+$bcError ="";
+
+//
+// if you are a student you can book this course
+//
+
+if(isset($_POST["BookCourse"])) {
+
+    $error=false;
+
+    $user_id = $_SESSION["STUDENT"];
+    $course_id = $_GET["id"];
+
+    // insert new record into booking with course+user
+
+    $sql="INSERT INTO `booking`(`fk_course_id`, `user_id`) VALUES ('$course_id','$user_id')";
+    
+    $result = mysqli_query($conn, $sql);
+
+    if(!$result){
+        $bcError ="sql-stmnt: ".$sql." went very wrong";
+        $error=true;
+    }
+    if (!$error) {
+
+        $sql="SELECT `id` FROM `booking` WHERE `fk_course_id`='$course_id' AND `user_id`='$user_id'";
+
+        $result = mysqli_query($conn, $sql);
+        if (!$result) {
+            $bcError ="sql-stmnt: ".$sql." went very wrong";
+            $error=true;
+        }
+        else {
+            $row = mysqli_fetch_assoc($result);
+            $booking_id = $row["id"];
+            $sql="INSERT INTO `users_booking`(`fk_user_id`, `fk_booking_id`) VALUES ('$user_id','$booking_id')";
+
+            $result = mysqli_query($conn, $sql);
+            if (!$result) {
+                $bcError ="sql-stmnt: ".$sql." went very wrong";
+                $error=true;
+            
+            }
+            else {
+            echo "
+            <div class='alert alert-success' role='alert'>
+                Booking created!
+            </div>";
+            header("Location: ../user/userProfile.php");
+            }
+        }
+    // mysqli_close($conn);
+    }
+}
+
 
 $sql = "SELECT 
             course.id AS course_id, 
@@ -50,12 +110,17 @@ $sql = "SELECT
             course.id = $_GET[id]";
 
 $result = mysqli_query($conn, $sql);
-$cards = "";
 
+if (mysqli_num_rows($result) == 0) {
+    header("Location: courses.php");
+    die();
+}
+
+$cards = "";
 if ($result) {
     while ($row = mysqli_fetch_assoc($result)) {
         // Container for Course Information
-        $cards = "
+        $cards .= "
         <div class='container py-4'>
             <header class='pb-3 mb-4 border-bottom'>
                 <a href='/' class='d-flex align-items-center text-body-emphasis text-decoration-none'>
@@ -85,8 +150,14 @@ if ($result) {
                         <button class='btn btn-outline-secondary' type='button'>Example button</button>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div>";
+        if (isset($_SESSION["STUDENT"])) {
+            $cards .= "<form method='post'>
+                <input type='submit' value='Book this course' name='BookCourse' class='btn btn-primary'>
+                <span class='text-danger'><?= $bcError ?></span>
+            </form>";
+            }
+        $cards .= "</div>
         ";
     }
 } else {
@@ -113,7 +184,7 @@ if ($result) {
 
 
 
-    <?php $cards ?>
+    <?php echo $cards ?>
 
 
 
