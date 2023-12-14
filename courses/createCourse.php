@@ -183,34 +183,42 @@ if (isset($_SESSION["ADM"]) || isset($_SESSION["TUTOR"])) {
         </div>
 
         <div class="form-group">
-            <label for="tutorId" class="form-label">Tutors:</label>
-            <select name="tutorId" class="form-select" required>
-                <?php
-                
-                     if (!$conn) {
-                        die("Connection failed: " . mysqli_connect_error());
-                    }
-                    // SQL query
-                    $sql = "SELECT * FROM users WHERE status = 'TUTOR'";
-                    $result = mysqli_query($conn, $sql);
-                    $tutors = "";
-                    if ($result) {
-                        if (mysqli_num_rows($result) > 0) {
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                $tutors .= '<option value="' . $row['id'] . '">' . $row['firstName'] . ' ' . $row['lastName'] . '</option>';
-                            }
-                            echo $tutors;
-                        } else {
-                            echo '<option value="" disabled>No tutors found</option>';
-                        }
-                        mysqli_free_result($result);
-                    } else {
-                        echo '<option value="" disabled>Error retrieving tutors</option>';
-                    }
-                    mysqli_close($conn);
-                    ?>
-            </select>
-        </div>
+    <label for="tutorId" class="form-label">Tutors:</label>
+    <select name="tutorId" class="form-select" required>
+        <?php
+        if (!$conn) {
+            die("Connection failed: " . mysqli_connect_error());
+        }
+
+        // SQL query
+        $sql = "SELECT * FROM users WHERE status = 'TUTOR'";
+        $result = mysqli_query($conn, $sql);
+        $tutors = "";
+
+        if ($result) {
+            if (mysqli_num_rows($result) > 0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    // Check if the logged-in user is a tutor
+                    $loggedInTutor = isset($_SESSION["TUTOR"]) && $_SESSION["TUTOR"] == $row['id'];
+
+                    // Add the selected attribute for the logged-in tutor
+                    $selected = $loggedInTutor ? 'selected' : '';
+
+                    $tutors .= '<option value="' . $row['id'] . '" ' . $selected . '>' . $row['firstName'] . ' ' . $row['lastName'] . '</option>';
+                }
+                echo $tutors;
+            } else {
+                echo '<option value="" disabled>No tutors found</option>';
+            }
+            mysqli_free_result($result);
+        } else {
+            echo '<option value="" disabled>Error retrieving tutors</option>';
+        }
+
+        mysqli_close($conn);
+        ?>
+    </select>
+</div>
 
         <input type="submit" value="Create" name="create" class="btn btn-primary mt-3 mb-5">
     </form>
