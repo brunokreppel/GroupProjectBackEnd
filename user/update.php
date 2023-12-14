@@ -127,7 +127,9 @@
 
             if ($_FILES["picture"]["error"] == 0){
                 if ($row["image"] !== "User-avatar.svg.png"){
-                    unlink("../assets/$row[image]");
+                    if ($row["image"] !== "User-avatar.svg.png"){
+                        unlink("../assets/$row[image]");
+                    }
                 }
                 $sql = "UPDATE `users` SET  `email`='$email',
                                             `passwd`='$password',
@@ -172,6 +174,10 @@
     }
     mysqli_close($conn);
 ?>
+
+<!-- if ($row["image"] !== "User-avatar.svg.png"){
+    unlink("../assets/$row[image]");
+} -->
 
 <!DOCTYPE html>
 <html lang="en">
