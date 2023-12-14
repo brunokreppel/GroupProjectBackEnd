@@ -164,7 +164,7 @@ mysqli_close($conn);
 <img src="assets/Logo_Charles.svg" alt="">
 <img src="assets/Logo_CTU.png" alt="">
 <img src="assets/Logo_Life.png" alt="">
-<img src="assets/Logo_NY.png" alt="">
+<img src="assets/Logo_NY.jpg" alt="">
 </div>
 
 </div>
