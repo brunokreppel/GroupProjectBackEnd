@@ -212,6 +212,11 @@ mysqli_close($conn);
 
 
 
+<?php
+require_once "components/footer.php";
+
+?>
+
 
     
 <!-- Swiper JS -->

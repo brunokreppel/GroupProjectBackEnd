@@ -3,7 +3,7 @@
 <?php
 echo "
 
-<footer bg-body-tertiary class='text-center'>
+<footer bg-body-tertiary class='text-center mt-3'>
   <!-- Grid container -->
   <div class='container p-4 pb-0'>
    
