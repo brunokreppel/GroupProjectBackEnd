@@ -21,8 +21,18 @@
                 $fileExtension = strtolower(pathinfo($image["name"], PATHINFO_EXTENSION));
                 if (!in_array($fileExtension, $allowedFileTypes)) { 
                     $message = "File is not supported. Upload only " . implode(", ", $allowedFileTypes) . " files.";
+                    if ($source == "courses") {
+                        $imageName = "Course.png";
+                    } else {
+                        $imageName = "User-avatar.svg.png";
+                    }
                 } else if ($image["size"] > 400000) { 
                     $message = "File is too large to upload.";
+                    if ($source == "courses") {
+                        $imageName = "Course.png";
+                    } else {
+                        $imageName = "User-avatar.svg.png";
+                    }
                 } else {
                     $imageName = uniqid("") . "." . $fileExtension; 
                     $destination = "../assets/{$imageName}";
