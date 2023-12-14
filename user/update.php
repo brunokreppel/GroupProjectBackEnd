@@ -28,7 +28,7 @@
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
     
-    if(isset($_POST["update"])){
+    if(isset($_POST["update"])) {
 
 
 
@@ -126,53 +126,60 @@
             //$password = hash("sha256", $password);
 
             if ($_FILES["picture"]["error"] == 0){
-                if ($row["image"] !== "User-avatar.svg.png"){
-                    if ($row["image"] !== "User-avatar.svg.png"){
+
+                if ($row["image"] !== $picture[0]){
+
+
+                    if ($row["image"] !== "User-avatar.svg.png") {
                         unlink("../assets/$row[image]");
+
                     }
+
+                    $sql = "UPDATE `users` SET  `email`='$email',
+                                                `passwd`='$password',
+                                                `firstName`='$first_name',
+                                                `lastName`='$last_name',
+                                                `dateOfBirth`='$dateOfBirth',
+                                                `image`='$picture[0]',
+                                                `phone_number`='$phone_number',
+                                                `profile_info`='$profile_info'
+
+                            WHERE id = $id";
                 }
-                $sql = "UPDATE `users` SET  `email`='$email',
-                                            `passwd`='$password',
-                                            `firstName`='$first_name',
-                                            `lastName`='$last_name',
-                                            `dateOfBirth`='$dateOfBirth',
-                                            `image`='$picture[0]',
-                                            `phone_number`='$phone_number',
-                                            `profile_info`='$profile_info'
+                else {
+                    $sql = "UPDATE `users` SET  `email`='$email',
+                                                `passwd`='$password',
+                                                `firstName`='$first_name',
+                                                `lastName`='$last_name',
+                                                `dateOfBirth`='$dateOfBirth',
+                                                `phone_number`='$phone_number',
+                                                `profile_info`='$profile_info'
 
-                        WHERE id = $id";
-            }
-            else {
-                $sql = "UPDATE `users` SET  `email`='$email',
-                                            `passwd`='$password',
-                                            `firstName`='$first_name',
-                                            `lastName`='$last_name',
-                                            `dateOfBirth`='$dateOfBirth',
-                                            `phone_number`='$phone_number',
-                                            `profile_info`='$profile_info'
+                            WHERE id = $id";
 
-                        WHERE id = $id";
+                }
 
-            }
+                $result = mysqli_query($conn, $sql);
 
-            $result = mysqli_query($conn, $sql);
-
-            if($result){
-                echo "
-            <div class='alert alert-success' role='alert'>
-                User updated!
-            </div>";
-            }
-            else{
-                echo "
-                <div class='alert alert-danger' role='alert'>
-                    Something went wrong!
+                if($result){
+                    echo "
+                <div class='alert alert-success' role='alert'>
+                    User updated!
                 </div>";
-            }
-        }
+                }
+                else{
+                    echo "
+                    <div class='alert alert-danger' role='alert'>
+                        Something went wrong!
+                    </div>";
+                }
+          }
 
+        }
     }
     mysqli_close($conn);
+
+
 ?>
 
 <!-- if ($row["image"] !== "User-avatar.svg.png"){

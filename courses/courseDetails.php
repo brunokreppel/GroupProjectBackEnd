@@ -55,7 +55,7 @@ $cards = "";
 if ($result) {
     while ($row = mysqli_fetch_assoc($result)) {
         // Container for Course Information
-        echo "
+        $cards = "
         <div class='container py-4'>
             <header class='pb-3 mb-4 border-bottom'>
                 <a href='/' class='d-flex align-items-center text-body-emphasis text-decoration-none'>
@@ -113,7 +113,7 @@ if ($result) {
 
 
 
-
+    <?php $cards ?>
 
 
 
