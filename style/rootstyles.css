@@ -1,11 +1,12 @@
 
 :root {
-    --primary-blue: #002147;
+    --primary-blue: #033268;
     --secondary-blue: #000020;
     --primary-white: #fefefe; 
     --secondary-white: #f8f8f8;
     --accent-color: #800e13;
     --text-color: #000;
+    --main-font: 'Bai Jamjuree';
     ;
   }
   *{
