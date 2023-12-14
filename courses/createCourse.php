@@ -6,19 +6,19 @@ require_once '../components/clean.php';
 $loc = "../";
 require_once "../components/navbar.php";
 
+// new validateDate function that works with datetime
+function validateDateTimeLocal($datetime)
+{
+    // Adjust the regular expression based on the datetime-local format
+    $pattern = '/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/';
+    return preg_match($pattern, $datetime);
+}
+
 if (isset($_SESSION["ADM"]) || isset($_SESSION["TUTOR"])) {
 
      // Predefined empty variables
      $fromDate= $toDate = $price = $image = $subjectId = $universityId = $tutorId = "";
-     $dateError = $priceError = "";
-    
-
-    function validateDate($date)
-    {
-        $d = DateTime::createFromFormat('Y-m-d', $date);
-        return $d && $d->format('Y-m-d') === $date;
-    }
-
+     $dateError = $priceError = $recordMessage = ""; 
    
 
     if (isset($_POST["create"])) {
@@ -32,10 +32,10 @@ if (isset($_SESSION["ADM"]) || isset($_SESSION["TUTOR"])) {
 
         $error = false;
 
-        // Validate date format
-        if (!validateDate($fromDate) || !validateDate($toDate)) {
+
+        if (!validateDateTimeLocal($fromDate) || !validateDateTimeLocal($toDate)) {
             $error = true;
-            $dateError = "Date must be in the right format.";
+            $dateError = "Invalid date format. Use the a real Date";
         }
 
         // Validate price
@@ -48,11 +48,11 @@ if (isset($_SESSION["ADM"]) || isset($_SESSION["TUTOR"])) {
             $sql = "INSERT INTO course (fk_subject_id, fk_university_id, fk_tutor_id, fromDate, ToDate, price, `image`)
                     VALUES ($subjectId, $universityId, $tutorId, '$fromDate', '$toDate', $price, '$image[0]')";
 
-            if (mysqli_query($conn, $sql)) {
-                echo "Record added successfully";
-            } else {
-                echo "Error adding record: " . mysqli_error($conn);
-            }
+        if (mysqli_query($conn, $sql)) {
+            $recordMessage = "Record added successfully";
+        } else {
+            $recordMessage = "Error adding record: " . mysqli_error($conn);
+        }
         }
     }
 } else {
@@ -96,6 +96,12 @@ if (isset($_SESSION["ADM"]) || isset($_SESSION["TUTOR"])) {
 <body>
 
 <div class="container">
+     <!-- Display record creation message -->
+     <?php if (!empty($recordMessage)) : ?>
+        <div class="alert m-4 text-center <?php echo (strpos($recordMessage, "Error") !== false) ? "alert-danger" : "alert-success"; ?>" role="alert">
+            <?php echo $recordMessage; ?>
+        </div>
+    <?php endif; ?>
     <form method="post" name="createForm" enctype="multipart/form-data">
         <div class="form-group">
             <label for="fromDate" class="form-label">From Date:</label>
@@ -177,34 +183,42 @@ if (isset($_SESSION["ADM"]) || isset($_SESSION["TUTOR"])) {
         </div>
 
         <div class="form-group">
-            <label for="tutorId" class="form-label">Tutors:</label>
-            <select name="tutorId" class="form-select" required>
-                <?php
-                
-                     if (!$conn) {
-                        die("Connection failed: " . mysqli_connect_error());
-                    }
-                    // SQL query
-                    $sql = "SELECT * FROM users WHERE status = 'TUTOR'";
-                    $result = mysqli_query($conn, $sql);
-                    $tutors = "";
-                    if ($result) {
-                        if (mysqli_num_rows($result) > 0) {
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                $tutors .= '<option value="' . $row['id'] . '">' . $row['firstName'] . ' ' . $row['lastName'] . '</option>';
-                            }
-                            echo $tutors;
-                        } else {
-                            echo '<option value="" disabled>No tutors found</option>';
-                        }
-                        mysqli_free_result($result);
-                    } else {
-                        echo '<option value="" disabled>Error retrieving tutors</option>';
-                    }
-                    mysqli_close($conn);
-                    ?>
-            </select>
-        </div>
+    <label for="tutorId" class="form-label">Tutors:</label>
+    <select name="tutorId" class="form-select" required>
+        <?php
+        if (!$conn) {
+            die("Connection failed: " . mysqli_connect_error());
+        }
+
+        // SQL query
+        $sql = "SELECT * FROM users WHERE status = 'TUTOR'";
+        $result = mysqli_query($conn, $sql);
+        $tutors = "";
+
+        if ($result) {
+            if (mysqli_num_rows($result) > 0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    // Check if the logged-in user is a tutor
+                    $loggedInTutor = isset($_SESSION["TUTOR"]) && $_SESSION["TUTOR"] == $row['id'];
+
+                    // Add the selected attribute for the logged-in tutor
+                    $selected = $loggedInTutor ? 'selected' : '';
+
+                    $tutors .= '<option value="' . $row['id'] . '" ' . $selected . '>' . $row['firstName'] . ' ' . $row['lastName'] . '</option>';
+                }
+                echo $tutors;
+            } else {
+                echo '<option value="" disabled>No tutors found</option>';
+            }
+            mysqli_free_result($result);
+        } else {
+            echo '<option value="" disabled>Error retrieving tutors</option>';
+        }
+
+        mysqli_close($conn);
+        ?>
+    </select>
+</div>
 
         <input type="submit" value="Create" name="create" class="btn btn-primary mt-3 mb-5">
     </form>
