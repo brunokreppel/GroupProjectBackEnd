@@ -21,6 +21,74 @@ if ($result && mysqli_num_rows($result) === 1) {
     exit();
 }
 
+$current_courses = ""; // will hold the list for ongoing/upcoming booked courses
+$past_courses = ""; // will hold the list for past courses
+
+if (isset($_SESSION["STUDENT"])) {
+    //
+    // show booked courses for the STUDENT (if there are any)
+    //
+
+    $current_courses = "<div class='container'><u>Currently ongoing or upcoming Courses:</u></div>"; // will hold the list for ongoing/upcoming booked courses
+    $past_courses = "<div class='container'><u>Past Courses:</u></div>"; // will hold the list for past courses
+
+
+    $user_id = $_SESSION["STUDENT"];
+
+    $sql="select    booking.id AS booking_id,
+                    booking.user_id AS booking_user_id,
+                    course.id AS course_id,
+                    course.fromDate AS course_fromDate,
+                    course.ToDate AS course_toDate,
+                    course.price AS course_price,
+                    course.image AS course_image,
+                    users.firstName AS tutor_first_name,
+                    users.lastName AS tutor_last_name,
+                    users.image AS tutor_image,
+                    university.name AS university_name,
+                    subject.name AS subject_name
+            from booking
+            JOIN course ON booking.fk_course_id = course.id
+            JOIN subject ON course.fk_subject_id = subject.id
+            JOIN university ON course.fk_university_id = university.id
+            JOIN users ON course.fk_tutor_id = users.id
+            where booking.user_id = '$user_id' ";
+
+    $courses=mysqli_query($conn, $sql);
+    if ($courses && mysqli_num_rows($courses) > 0) {
+        //
+        // user has booked one->many courses
+        //
+        while ($row = mysqli_fetch_assoc($courses)) {
+            //
+            // loop over all courses
+            //
+            $today = date("Ymd");
+            if (strtotime($row['course_toDate']) < strtotime($today)) {
+                $past_courses .= "                    
+                    <div class='container'>
+                        <p>{$row['subject_name']} / {$row['university_name']}</p>                        
+                        <small class='text-body-secondary'>" . date('F j, Y', strtotime($row['course_fromDate'])) . "</small>
+                        <small class='text-body-secondary'>" . date('F j, Y', strtotime($row['course_toDate'])) . "</small>
+                        <p>Tutor: {$row['tutor_first_name']} {$row['tutor_last_name']}</p>
+                    </div>";
+            }
+            else {
+                $current_courses .= "
+                    <div class='container'>
+                        <p>{$row['subject_name']} / {$row['university_name']}</p>                        
+                        <small class='text-body-secondary'>" . date('F j, Y', strtotime($row['course_fromDate'])) . "</small>
+                        <small class='text-body-secondary'>" . date('F j, Y', strtotime($row['course_toDate'])) . "</small>
+                        <p>Tutor: {$row['tutor_first_name']} {$row['tutor_last_name']}</p>
+                    </div>";
+            }
+        }
+    }
+    else {
+        // no rows found
+        $current_courses= "<div class='container'>You have not booked any courses yet</div>";
+    }
+}
 mysqli_close($conn);
 ?>
 
@@ -86,6 +154,10 @@ mysqli_close($conn);
             </div>
         </div>
     </div>
+
+    <?php echo $current_courses ?>
+    <?php echo $past_courses ?>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>
