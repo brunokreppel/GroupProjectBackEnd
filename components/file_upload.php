@@ -21,7 +21,7 @@
                 $fileExtension = strtolower(pathinfo($image["name"], PATHINFO_EXTENSION));
                 if (!in_array($fileExtension, $allowedFileTypes)) { 
                     $message = "File is not supported. Upload only " . implode(", ", $allowedFileTypes) . " files.";
-                } else if ($image["size"] > 200000) { 
+                } else if ($image["size"] > 300000) { 
                     $message = "File is too large to upload.";
                 } else {
                     $imageName = uniqid("") . "." . $fileExtension; 
