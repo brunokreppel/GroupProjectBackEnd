@@ -2,7 +2,6 @@
 session_start();
 $loc = "../";
 require_once '../components/db_Connect.php';
-require_once '../components/file_upload.php';
 require_once '../components/clean.php';
 require_once "../components/navbar.php";
 
@@ -41,6 +40,7 @@ if (isset($_SESSION["STUDENT"])) {
 
         if (mysqli_query($conn, $sqlInsert)) {
             $recordMessage = "Record added successfully";
+            header("refresh: 2; url= userReview.php");
         } else {
             $recordMessage = "Error adding record: " . mysqli_error($conn);
         }
@@ -207,33 +207,28 @@ if (isset($_SESSION["STUDENT"])) {
 
 <script>
     const stars = document.querySelectorAll('.star-rating i');
+    const ratingHolder = document.getElementById('rating-value');
+    
+    let getRating = (element) => parseInt(element.getAttribute("data-rating"));
 
-    stars.forEach(star => {
-        star.addEventListener('click', (index) => {
-            const rating = star.getAttribute('data-rating');
-            star.setAttribute("barno", index);
-            document.getElementById('rating-value').value = calculateRating(rating);
-            stars.forEach(s => s.classList.remove('active'));
-            star.classList.add('active');
+    setStarsActive(stars, ratingHolder.value);
+
+    stars.forEach((star) => {
+        star.addEventListener("click", () => {
+            const rating = getRating(star);
+            ratingHolder.value = rating;
+            setStarsActive(stars, rating);
         });
     });
 
-    function calculateRating(selectedRating) {
-        let finalRating = 0;
-        const selected = parseInt(selectedRating);
-
-        if (selected >= 1 && selected <= 2) {
-            finalRating = 2;
-        } else if (selected >= 1 && selected <= 3) {
-            finalRating = 3;
-        } else if (selected >= 1 && selected <= 4) {
-            finalRating = 4;
-        } else if (selected >= 1 && selected <= 5) {
-            finalRating = 5;
-        }
-
-        return finalRating;
+    function setStarsActive(stars, rating){
+        stars.forEach((s) => {
+            s.classList.remove("active");
+            if(getRating(s) <= rating) 
+                s.classList.add("active");
+        });
     }
+
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>

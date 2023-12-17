@@ -1,9 +1,12 @@
+
 <?php
 
 session_start();
 $loc = "../";
 require_once '../components/db_Connect.php';
 require_once "../components/navbar.php";
+
+$loggedInStudentId = $_SESSION["STUDENT"];
 
 $sql = "SELECT 
     r.id AS review_id,
@@ -21,6 +24,7 @@ $sql = "SELECT
     JOIN `course` c ON r.fk_course_id = c.id
     JOIN `subject` s ON c.fk_subject_id = s.id
     JOIN `users` u ON r.fk_user_id = u.id
+    WHERE u.id = $loggedInStudentId
 ";
 
 
@@ -51,6 +55,10 @@ if ($result) {
                 <p class='card-text'>{$row['review_creation_date']}</p>
                 <p class='card-text'>From: {$row['user_firstName']} {$row['user_lastName']}</p>
             </div>
+            <div class='btn-group mb-2'>
+                <a href='updateReview.php?id={$row['review_id']}' class='btn-link text-decoration-none text-reset'><button type='button' class='btn btn-outline-warning mx-2'>Update</button></a>
+                <a href='deleteReview.php?id={$row['review_id']}' class='btn-link text-decoration-none text-reset'><button type='button' class='btn btn-outline-danger mx-2'>Delete</button></a>
+            </div>
         </div> ";
     }
 } else {
@@ -59,6 +67,7 @@ if ($result) {
 }
 
 mysqli_close($conn);
+
 ?>
 
 
@@ -68,7 +77,7 @@ mysqli_close($conn);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>My reviews</title>
     <link rel="stylesheet" href="style/rootstyles.css">
     <link rel="stylesheet" href="style/index.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -94,7 +103,7 @@ mysqli_close($conn);
     <section class="py-5 text-center container">
         <div class="row py-lg-5">
             <div class="col-lg-6 col-md-8 mx-auto">
-                <h1 class="fw-light">Reviews</h1>
+                <h1 class="fw-light">My reviews</h1>
             </div>
         </div>
     </section>
