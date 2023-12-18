@@ -1,22 +1,25 @@
 <?php
 echo "
 <style>
+    /* Styles for navbar links on hover */
     .navbar-nav a:hover {
         color: #800e13 !important;
     }
-    /* Add a custom class for the second ul element */
+
+    /* Custom class for the second ul element */
     .navbar-nav-right {
         position: absolute;
-        right: 10px; /* You can adjust the right distance as needed */
+        right: 10px; /* Adjust the right distance as needed */
     }
 
-    /* Add a media query to remove the position at a width of 991px */
+    /* Media query to remove position at a width of 991px */
     @media (max-width: 991px) {
         .navbar-nav-right {
             position: static;
         }
     }
 </style>
+
 <nav class='navbar navbar-expand-lg navbar-light' style='background-color: #fefefe;'>
     <div class='container-fluid'>
         <a class='navbar-brand' href='{$loc}index.php'>TutorSphere</a>
@@ -27,31 +30,38 @@ echo "
         </button>
         <div class='collapse navbar-collapse' id='navbarNav'>
             <ul class='navbar-nav'>
+                <!-- Home link -->
                 <li class='nav-item'>
                     <a class='nav-link' href='{$loc}index.php'>Home</a>
                 </li>
+                <!-- Courses link -->
                 <li class='nav-item'>
                     <a class='nav-link' href='{$loc}courses/courses.php'>Courses</a>
                 </li>
-                ";
+                <!-- Reviews link -->
+                <li class='nav-item'>
+                    <a class='nav-link' href='{$loc}reviews/reviews.php'>Reviews</a>
+                </li>";
+
 if (isset($_SESSION["TUTOR"]) || isset($_SESSION["ADM"])){
     echo "
-    <li class='nav-item'>
-<a class='nav-link' href='{$loc}courses/createCourse.php'>Create-Course</a>
-</li>
+                <!-- Dashboard link for logged-in tutors or admins -->
+                <li class='nav-item'>
+                    <a class='nav-link' href='{$loc}dashboard/dashboard.php'>Dashboard</a>
+                </li>
             </ul>
     ";
 }
-
-
 
 // Check if there is an active session
 if (isset($_SESSION["STUDENT"]) || isset($_SESSION["ADM"]) || isset($_SESSION["TUTOR"])) {
     echo "
             <ul class='navbar-nav navbar-nav-right'>
+                <!-- Profile link for logged-in users -->
                 <li class='nav-item'>
                     <a class='nav-link' href='{$loc}user/userProfile.php'>Profile</a>
                 </li>
+                <!-- Logout link for logged-in users -->
                 <li class='nav-item'>
                     <a class='nav-link' href='{$loc}user/logout.php'>Logout</a>
                 </li>
@@ -60,9 +70,11 @@ if (isset($_SESSION["STUDENT"]) || isset($_SESSION["ADM"]) || isset($_SESSION["T
     // If no active session, display Login and Register links
     echo "
             <ul class='navbar-nav navbar-nav-right'>
+                <!-- Login link for users without an active session -->
                 <li class='nav-item'>
                     <a class='nav-link' href='{$loc}user/login.php'>Login</a>
                 </li>
+                <!-- Register link for users without an active session -->
                 <li class='nav-item'>
                     <a class='nav-link' href='{$loc}user/register.php'>Register</a>
                 </li>
