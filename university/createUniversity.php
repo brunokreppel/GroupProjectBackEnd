@@ -1,3 +1,4 @@
+
 <?php
 
 session_start();
@@ -16,57 +17,50 @@ if(!isset($_SESSION["ADM"])){
 if (isset($_SESSION["ADM"])) {
 
      // Predefined empty variables
-     $name = $description = $core_concepts = $exam_preparation = $importance = "";
-     $nameError = $descriptionError = $core_conceptsError = $exam_preparationError = $importanceError = $recordMessage = ""; 
+     $name = $location = $extURL = $uni_description = "";
+     $nameError = $locationError = $extURLError = $uni_descriptionError = $recordMessage = ""; 
    
 
     if (isset($_POST["create"])) {
         $name = clean($_POST["name"]);
-        $description = clean($_POST["description"]);
-        $core_concepts = clean($_POST["core_concepts"]);
-        $exam_preparation = clean($_POST["exam_preparation"]);
-        $importance = clean($_POST["importance"]);
+        $location = clean($_POST["location"]);
+        $extURL = clean($_POST["extURL"]);
+        $uni_description = clean($_POST["uni_description"]);
 
         $error = false;
-
 
         // Validate name
         if(empty($name)) {
             $error=true;
-            $nameError = "This field cannot be empty";
+            $nameError = "The name field cannot be empty";
         }
 
-        // Validate description
-        if(empty($description)) {
+        // Validate location
+        if(empty($location)) {
             $error=true;
-            $descriptionError = "Description cannot be empty";
+            $locationError = "Location cannot be empty";
         }
 
-        // Validate core_concepts
-        if(empty($core_concepts)) {
+        // Validate extURL
+        if(empty($extURL)) {
             $error=true;
-            $core_conceptsError = "This field cannot be empty";
+            $extURLError = "Website cannot be empty";
         }
 
-        // Validate exam_preparation
-        if(empty($exam_preparation)) {
+        // Validate uni_description
+        if(empty($uni_description)) {
             $error=true;
-            $exam_preparationError = "This field cannot be empty";
+            $uni_descriptionError = "Description cannot be empty";
         }
 
-        // Validate importance
-        if(empty($importance)) {
-            $error=true;
-            $importanceError = "This field cannot be empty";
-        }
 
         if ($error === false) {
-            $sqlInsert = "INSERT INTO `subject`(`name`, `description`,  `core_concepts`, `exam_preparation`, `importance`)
-            VALUES ('$name', '$description', '$core_concepts', '$exam_preparation', '$importance')";
+            $sqlInsert = "INSERT INTO `university`(`name`, `location`,  `extURL`, `uni_description`)
+            VALUES ('$name', '$location', '$extURL', '$uni_description')";
 
         if (mysqli_query($conn, $sqlInsert)) {
-            $recordMessage = "Subject has been created";
-            header("refresh: 2; url= subjects.php");
+            $recordMessage = "University has been created";
+            header("refresh: 2; url= universities.php");
         } else {
             $recordMessage = "Error adding record: " . mysqli_error($conn);
         }
@@ -85,12 +79,11 @@ if (isset($_SESSION["ADM"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Subject</title>
+    <title>Create University</title>
     <link rel="stylesheet" href="style/rootstyles.css">
     <link rel="stylesheet" href="style/index.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" crossorigin="">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         .form-group {
             margin-bottom: 1rem;
@@ -109,8 +102,9 @@ if (isset($_SESSION["ADM"])) {
             border-radius: 0.25rem;
             border: 1px solid #ced4da;
         }
+
         textarea{
-            height: fit-content;
+            height: 20dvh;
         }
     </style>
 </head>
@@ -125,40 +119,34 @@ if (isset($_SESSION["ADM"])) {
         </div>
     <?php endif; ?>
 
-    <h3 class="text-center">Subject</h3>
+    <h3 class="text-center">University</h3>
     <form method="POST">
 
         <div class="form-group">
-            <label for="name" class="form-label">Subject name:</label>
+            <label for="name" class="form-label">University name:</label>
             <input type="text" class="form-control" name="name" required>
             <span class="text-danger"><?= $nameError ?></span>
         </div>
 
         <div class="form-group">
-            <label for="description" class="form-label">Description:</label>
-            <input type="text" class="form-control" name="description" required>
-            <span class="text-danger"><?= $descriptionError ?></span>
+            <label for="location" class="form-label">Location:</label>
+            <input type="text" class="form-control" name="location" required>
+            <span class="text-danger"><?= $locationError ?></span>
         </div>
 
         <div class="form-group">
-            <label for="core_concepts" class="form-label">Core concepts:</label>
-            <textarea type="text" class="form-control" name="core_concepts" required></textarea>
-            <span class="text-danger"><?= $core_conceptsError ?></span>
+            <label for="extURL" class="form-label">Website:</label>
+            <input type="text" class="form-control" name="extURL" required>
+            <span class="text-danger"><?= $extURLError ?></span>
         </div>
 
         <div class="form-group">
-            <label for="exam_preparation" class="form-label">Exam preparation:</label>
-            <textarea type="text" class="form-control" name="exam_preparation" required></textarea>
-            <span class="text-danger"><?= $exam_preparationError ?></span>
-        </div>
-
-        <div class="form-group">
-            <label for="importance" class="form-label">Importance:</label>
-            <textarea type="text" class="form-control" name="importance" required></textarea>
-            <span class="text-danger"><?= $importanceError ?></span>
+            <label for="uni_description" class="form-label">Description:</label>
+            <textarea type="text" class="form-control" name="uni_description" required></textarea>
+            <span class="text-danger"><?= $uni_descriptionError ?></span>
         </div>
         
-        <button name="create" type="submit" class="btn btn-primary">Add a subject</button>
+        <button name="create" type="submit" class="btn btn-primary">Add a university</button>
     </form>
 
 </div>

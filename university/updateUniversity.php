@@ -1,3 +1,5 @@
+
+
 <?php
 
 session_start();
@@ -15,25 +17,24 @@ if(!isset($_SESSION["ADM"])){
 if (isset($_SESSION["ADM"])) {
 
      // Predefined empty variables
-     $name = $description = $core_concepts = $exam_preparation = $importance = "";
+     $name = $location = $extURL = $uni_description = "";
      $recordMessage = ""; 
      $error = false;
 
      if(isset($_GET["id"]) && !empty($_GET["id"])){
         $id = $_GET["id"]; 
-        $sql = "SELECT * FROM `subject` WHERE `id` = $id";
+        $sql = "SELECT * FROM `university` WHERE `id` = $id";
         $result = mysqli_query($conn, $sql);
 
         if ($result) {
             if (mysqli_num_rows($result) > 0) {
                 $row = mysqli_fetch_assoc($result);
                 $name = $row["name"];
-                $description = $row["description"];
-                $core_concepts = $row["core_concepts"];
-                $exam_preparation = $row["exam_preparation"];
-                $importance = $row["importance"];
+                $location = $row["location"];
+                $extURL = $row["extURL"];
+                $uni_description = $row["uni_description"];
             } else {
-                echo "No subject found with ID: $id";
+                echo "No university found with ID: $id";
             }
             mysqli_free_result($result);
         } else {
@@ -41,28 +42,25 @@ if (isset($_SESSION["ADM"])) {
         }
 
     }
-   
 
     if (isset($_POST["update"])) {
         $name = $_POST["name"];
-        $description = $_POST["description"];
-        $core_concepts = $_POST["core_concepts"];
-        $exam_preparation = $_POST["exam_preparation"];
-        $importance = $_POST["importance"];
+        $location = $_POST["location"];
+        $extURL = $_POST["extURL"];
+        $uni_description = $_POST["uni_description"];
 
 
         if ($error === false) {
-            $sqlUpdate = "UPDATE `subject` SET 
+            $sqlUpdate = "UPDATE `university` SET 
                 `name`= '$name', 
-                `description`= '$description', 
-                `core_concepts`= '$core_concepts',
-                `exam_preparation`= '$exam_preparation', 
-                `importance`= '$importance'
+                `location`= '$location', 
+                `extURL`= '$extURL',
+                `uni_description`= '$uni_description'
                 WHERE id = $id";
 
             if (mysqli_query($conn, $sqlUpdate)) {
-                $recordMessage = "Subject has been updated successfully";
-                header("refresh: 2; url= subjects.php");
+                $recordMessage = "University has been updated successfully";
+                header("refresh: 2; url= universities.php");
             } else {
                 $recordMessage = "Error updating record: " . mysqli_error($conn);
             }
@@ -81,12 +79,11 @@ if (isset($_SESSION["ADM"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update Subject</title>
+    <title>Update University</title>
     <link rel="stylesheet" href="style/rootstyles.css">
     <link rel="stylesheet" href="style/index.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" crossorigin="">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         .form-group {
             margin-bottom: 1rem;
@@ -105,6 +102,10 @@ if (isset($_SESSION["ADM"])) {
             border-radius: 0.25rem;
             border: 1px solid #ced4da;
         }
+
+        textarea{
+            height: 20dvh;
+        }
     </style>
 </head>
 <body>
@@ -118,37 +119,32 @@ if (isset($_SESSION["ADM"])) {
         </div>
     <?php endif; ?>
 
-    <h3 class="text-center">Subject</h3>
+    <h3 class="text-center">University</h3>
     <form method="POST">
 
         <div class="form-group">
-            <label for="name" class="form-label">Subject name:</label>
+            <label for="name" class="form-label">University name:</label>
             <input type="text" class="form-control" name="name"  value="<?= $row["name"]??"" ?>"></input>
         </div>
 
         <div class="form-group">
-            <label for="description" class="form-label">Description:</label>
-            <input type="text" class="form-control" name="description" value="<?= $row["description"]??"" ?>"></input>
+            <label for="location" class="form-label">Location:</label>
+            <input type="text" class="form-control" name="location" value="<?= $row["location"]??"" ?>"></input>
+        </div>
+
+
+        <div class="form-group">
+            <label for="extURL" class="form-label">Website:</label>
+            <input type="text" class="form-control" name="extURL" value="<?= $row["extURL"]??"" ?>"></input>
         </div>
 
         <div class="form-group">
-            <label for="core_concepts" class="form-label">Core concepts:</label>
-            <textarea type="text" class="form-control" name="core_concepts"><?= $row["core_concepts"]??"" ?></textarea>
+            <label for="uni_description" class="form-label">Description:</label>
+            <textarea type="text" class="form-control" name="uni_description"><?= $row["uni_description"]??"" ?></textarea>
         </div>
 
-        <div class="form-group">
-            <label for="exam_preparation" class="form-label">Exam preparation:</label>
-            <textarea type="text" class="form-control" name="exam_preparation"><?= $row["exam_preparation"]??"" ?></textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="importance" class="form-label">Importance:</label>
-            <textarea type="text" class="form-control" name="importance"><?= $row["importance"]??"" ?></textarea>
-        </div>
-
-        
-        <button name="update" type="submit" class="btn btn-primary">Update subject</button>
-        <a href='subjects.php' class='btn-link text-decoration-none text-reset'><button type='button' class='btn btn-outline-secondary mx-2'>Back</button></a>
+        <button name="update" type="submit" class="btn btn-primary">Update university</button>
+        <a href='universities.php' class='btn-link text-decoration-none text-reset'><button type='button' class='btn btn-outline-secondary mx-2'>Back</button></a>
     </form>
 
 </div>
