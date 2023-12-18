@@ -17,7 +17,7 @@ echo "
         }
     }
 </style>
-<nav class='navbar navbar-expand-lg navbar-light' style='background-color: #ffffff;'>
+<nav class='navbar navbar-expand-lg navbar-light' style='background-color: #fefefe;'>
     <div class='container-fluid'>
         <a class='navbar-brand' href='{$loc}index.php'>TutorSphere</a>
         <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarNav'

@@ -4,6 +4,8 @@
     require_once '../components/db_connect.php';
     require_once '../components/clean.php';
     require_once '../components/file_upload.php';
+    $loc = "../";
+    require_once "../components/navbar.php";
 
     if(isset($_SESSION["STUDENT"]) || isset($_SESSION["ADM"]) || isset($_SESSION["TUTOR"])){
         // redirect to another page because the session has been already created
@@ -136,57 +138,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register User</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../style/form.css">
+    <link rel="stylesheet" href="../style/rootstyles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@400;700&display=swap" rel="stylesheet">
+
 </head>
 <body>
 
-    <div class="container">
-            <h1 class="text-center">Register</h1>
+    <div class="container formContainer mb-5">
+    <h2 class="fw-bold text-center mb-3">User Registration</h2>
             <form method="post" autocomplete="off" enctype="multipart/form-data">
                 <div class="mb-3 mt-3">
-                    <label for="fname" class="form-label">First name</label>
-                    <input type="text" class="form-control" id="fname" name="first_name" placeholder="First name" value="<?= $first_name ?>">
+                    <label for="fname" class="form-label">First name:</label>
+                    <input type="text" class="form-control floating-label" id="fname" name="first_name"  value="<?= $first_name ?>">
                     <span class="text-danger"><?= $fnameError ?></span>
                 </div>
                 <div class="mb-3">
-                    <label for="lname" class="form-label">Last name</label>
-                    <input type="text" class="form-control" id="lname" name="last_name" placeholder="Last name" value="<?= $last_name ?>">
+                    <label for="lname" class="form-label">Last name:</label>
+                    <input type="text" class="form-control" id="lname" name="last_name"  value="<?= $last_name ?>">
                     <span class="text-danger"><?= $lnameError ?></span>
                 </div>
                 <div class="mb-3">
-                    <label for="dateOfBirth" class="form-label">Date Of Birth</label>
-                    <input type="date" class="form-control" id="dateofbirth" name="dateOfBirth" placeholder="DateOfBirth" value="<?= $dateOfBirth ?>">
+                    <label for="dateOfBirth" class="form-label">Date Of Birth:</label>
+                    <input type="date" class="form-control" id="dateofbirth" name="dateOfBirth" value="<?= $dateOfBirth ?>">
                     <span class="text-danger"><?= $dateofbirthError ?></span>
                 </div>
                 <div class="mb-3">
-                    <label for="pinfo" class="form-label">Information</label>
+                    <label for="pinfo" class="form-label">Information:</label>
                     <textarea name="profile_info" id="pinfo" cols="50" rows="5"></textarea>
                     <span class="text-danger"><?= $profile_infoError ?></span>
                 </div>
                 <div class="mb-3">
-                    <label for="pnumber" class="form-label">Phone Number</label>
-                    <input type="text" class="form-control" id="pnumber" name="phone_number" placeholder="Phone Number" value="<?= $phone_number ?>">
+                    <label for="pnumber" class="form-label">Phone Number:</label>
+                    <input type="text" class="form-control" id="pnumber" name="phone_number" value="<?= $phone_number ?>">
                     <span class="text-danger"><?= $phone_numberError ?></span>
                 </div>
                 <div class="mb-3">
-                    <label for="picture" class="form-label">Profile picture</label>
+                    <label for="picture" class="form-label">Profile picture:</label>
                     <input type="file" class="form-control" id="picture" name="picture">
                 </div>
                 <div class="mb-3">
-                    <label for="email" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Email address" value="<?= $email ?>">
+                    <label for="email" class="form-label">Email address:</label>
+                    <input type="email" class="form-control" id="email" name="email"  value="<?= $email ?>">
                     <span class="text-danger"><?= $emailError ?></span>
                 </div>
                 <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
+                    <label for="password" class="form-label">Password:</label>
                     <input type="password" class="form-control" id="password" name="password">
                     <span class="text-danger"><?= $passError ?></span>
                 </div>
-                <button name="register" type="submit" class="btn btn-primary">Create account</button>
+
+                <div class="d-flex justify-content-center">
+                    <button name="register" type="submit" class="btn btn-primary">Create account</button>
+                </div>
+                <br>
                 
                 <span>Do you have an account already? <a href="login.php">Sign in here</a></span>
             </form>
         </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>
