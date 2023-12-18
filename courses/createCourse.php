@@ -14,6 +14,50 @@ function validateDateTimeLocal($datetime)
     return preg_match($pattern, $datetime);
 }
 
+function check_course ($user_id, $from_date, $to_date) {
+
+    require '../components/db_connect.php';
+    //
+    // check if there are any other course for this tutor in this timeframe
+    //
+    $courses=true; // variable returns false if there are already courses and they overlap with the given timeframe
+
+    $sql = "SELECT  course.id AS course_id,
+                    course.fromDate AS course_fromDate,
+                    course.ToDate AS course_toDate
+            from course
+            where course.fk_tutor_id = '$user_id' ";
+    
+    $user_courses = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($user_courses) == 0) {
+        //
+        // no courses exist for this tutor, everything okay
+        //
+        $courses=true;
+        }
+    else {
+        //
+        // courses exist, check if their timeframes are in this range
+        //
+        while ($row_courses = mysqli_fetch_assoc($user_courses)) {
+            if ( strtotime($from_date) <= strtotime($row_courses['course_fromDate']) &&
+                 strtotime($to_date) >= strtotime($row_courses['course_fromDate']) &&
+                 strtotime($to_date)  <= strtotime($row_courses['course_toDate'])
+              ) {
+                $courses=false;
+            }
+            if ( strtotime($from_date) <= strtotime($row_courses['course_toDate']) &&
+                 strtotime($from_date) >= strtotime($row_courses['course_fromDate']) &&
+                 strtotime($to_date)  >= strtotime($row_courses['course_toDate'])                                                          
+                ) {
+                $courses=false;
+            }
+        }
+    }
+    return $courses;
+}
+
+
 if (isset($_SESSION["ADM"]) || isset($_SESSION["TUTOR"])) {
 
      // Predefined empty variables
@@ -42,6 +86,14 @@ if (isset($_SESSION["ADM"]) || isset($_SESSION["TUTOR"])) {
             $dateError = "ToDate should be after FromDate";
         }
         
+        if (!check_course($tutorId, $fromDate, $toDate)) {
+            //
+            // courses in the given timeframe exist
+            //
+            $error = true;
+            $dateError = "A course in the given timeframe already exists ! Choose a different timeframe";
+        }
+
         // Validate price
         if (!is_numeric($price) || $price <= 0) {
             $error = true;
@@ -52,11 +104,11 @@ if (isset($_SESSION["ADM"]) || isset($_SESSION["TUTOR"])) {
             $sql = "INSERT INTO course (fk_subject_id, fk_university_id, fk_tutor_id, fromDate, ToDate, price, `image`)
                     VALUES ($subjectId, $universityId, $tutorId, '$fromDate', '$toDate', $price, '$image[0]')";
 
-        if (mysqli_query($conn, $sql)) {
-            $recordMessage = "Record added successfully";
-        } else {
-            $recordMessage = "Error adding record: " . mysqli_error($conn);
-        }
+            if (mysqli_query($conn, $sql)) {
+                $recordMessage = "Record added successfully";
+            } else {
+                $recordMessage = "Error adding record: " . mysqli_error($conn);
+            }
         }
     }
 } else {

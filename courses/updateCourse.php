@@ -13,10 +13,54 @@ function validateDateTimeLocal($datetime)
     return preg_match($pattern, $datetime);
 }
 
+function check_course ($id, $user_id, $from_date, $to_date) {
+
+    require '../components/db_connect.php';
+    //
+    // check if there are any other course for this tutor in this timeframe
+    //
+    $courses=true; // variable returns false if there are already courses and they overlap with the given timeframe
+
+    $sql = "SELECT  course.id AS course_id,
+                    course.fromDate AS course_fromDate,
+                    course.ToDate AS course_toDate
+            from course
+            where course.fk_tutor_id = '$user_id'
+            AND course.id != $id";
+    
+    $user_courses = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($user_courses) == 0) {
+        //
+        // no courses exist for this tutor, everything okay
+        //
+        $courses=true;
+        }
+    else {
+        //
+        // courses exist, check if their timeframes are in this range
+        //
+        while ($row_courses = mysqli_fetch_assoc($user_courses)) {
+            if ( strtotime($from_date) <= strtotime($row_courses['course_fromDate']) &&
+                 strtotime($to_date) >= strtotime($row_courses['course_fromDate']) &&
+                 strtotime($to_date)  <= strtotime($row_courses['course_toDate'])
+              ) {
+                $courses=false;
+            }
+            if ( strtotime($from_date) <= strtotime($row_courses['course_toDate']) &&
+                 strtotime($from_date) >= strtotime($row_courses['course_fromDate']) &&
+                 strtotime($to_date)  >= strtotime($row_courses['course_toDate'])                                                          
+                ) {
+                $courses=false;
+            }
+        }
+    }
+    return $courses;
+}
+
 if (isset($_SESSION["ADM"]) || isset($_SESSION["TUTOR"])) {
     // Initialize variables
     $id = $fromDate = $toDate = $price = $subjectId = $universityId = $tutorId = $image = "";
-    $priceError = "";
+    $priceError = $tutorError = "";
     $error = false;
 
     // Fetch the course details based on the passed id
@@ -56,6 +100,14 @@ if (isset($_SESSION["ADM"]) || isset($_SESSION["TUTOR"])) {
         if (!is_numeric($price) || $price <= 0) {
             $error = true;
             $priceError = "Price must be a positive Number.";
+        }
+
+        if (!check_course($id, $tutorId, $fromDate, $toDate)) {
+            //
+            // a course in this timeframe already exists for this tutor
+            //
+            $error = true;
+            $tutorError = "A course in this timeframe already exists for this tutor";
         }
 
         // Check if a new image is provided for update
@@ -143,8 +195,8 @@ if (isset($_SESSION["ADM"]) || isset($_SESSION["TUTOR"])) {
                 <label for="price" class="form-label">Price:</label>
                 <input type="number" name="price" class="form-control" required value="<?php echo $price; ?>">
                 <div class="text-danger">
-            <?= $priceError ?>
-            </div>
+                    <?= $priceError ?>
+                </div>
             </div>
 
             <div class="form-group">
@@ -204,6 +256,9 @@ if (isset($_SESSION["ADM"]) || isset($_SESSION["TUTOR"])) {
                     }
                     ?>
                 </select>
+                <div class="text-danger">
+                    <?= $tutorError ?>
+                </div>
             </div>
 
             <input type="submit" value="Update" name="update" class="btn btn-primary mt-3 ">
