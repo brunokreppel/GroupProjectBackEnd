@@ -37,7 +37,11 @@ if (isset($_SESSION["ADM"]) || isset($_SESSION["TUTOR"])) {
             $error = true;
             $dateError = "Invalid date format. Use the a real Date";
         }
-
+        if (strtotime($fromDate) > strtotime($toDate)) {
+            $error=true;
+            $dateError = "ToDate should be after FromDate";
+        }
+        
         // Validate price
         if (!is_numeric($price) || $price <= 0) {
             $error = true;
