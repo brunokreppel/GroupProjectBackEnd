@@ -3,7 +3,7 @@
     --primary-blue: #033268;
     --secondary-blue: #000020;
     --primary-white: #fefefe; 
-    --secondary-white: #f8f8f8;
+    --secondary-white: #F8F9FA;
     --accent-color: #800e13;
     --text-color: #000;
     --main-font: 'Bai Jamjuree';
@@ -13,13 +13,14 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: 'Bai Jamjuree', sans-serif;
   }
   body{
     background-color: var(--primary-white);
   }
 
   
-  
+ 
 
 
 
