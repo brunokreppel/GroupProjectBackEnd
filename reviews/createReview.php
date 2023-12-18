@@ -39,7 +39,7 @@ if (isset($_SESSION["STUDENT"])) {
                     VALUES ($rating, '$message', $course_id, $loggedInStudentId)";
 
         if (mysqli_query($conn, $sqlInsert)) {
-            $recordMessage = "Record added successfully";
+            $recordMessage = "Review has been created";
             header("refresh: 2; url= userReview.php");
         } else {
             $recordMessage = "Error adding record: " . mysqli_error($conn);
@@ -59,7 +59,7 @@ if (isset($_SESSION["STUDENT"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Create Review</title>
     <link rel="stylesheet" href="style/rootstyles.css">
     <link rel="stylesheet" href="style/index.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
