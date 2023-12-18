@@ -14,6 +14,51 @@ if (!isset($_GET["id"]) || empty($_GET["id"])) {
 
 $bcError ="";
 
+function check_booking ($user_id, $from_date, $to_date) {
+
+    require '../components/db_Connect.php';
+    //
+    // check if there are any other bookings for this student in this timeframe
+    //
+    $bookings=true; // variable returns false if there are already bookings and they overlap with the given timeframe
+
+    $sql = "SELECT  booking.id AS booking_id,
+                    course.id AS course_id,
+                    course.fromDate AS course_fromDate,
+                    course.ToDate AS course_toDate
+            from booking
+            JOIN course ON booking.fk_course_id = course.id
+            where booking.user_id = '$user_id' ";
+    
+    $user_bookings = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($user_bookings) == 0) {
+        //
+        // no bookings exist for this user, everything okay
+        //
+        $bookings=true;
+        }
+    else {
+        //
+        // bookings exist, check if their timeframes are out of range
+        //
+        while ($row_bookings = mysqli_fetch_assoc($user_bookings)) {
+            if ( strtotime($from_date) <= strtotime($row_bookings['course_fromDate']) &&
+                 strtotime($to_date) >= strtotime($row_bookings['course_fromDate']) &&
+                 strtotime($to_date)  <= strtotime($row_bookings['course_toDate'])
+              ) {
+                $bookings=false;
+            }
+            if ( strtotime($from_date) <= strtotime($row_bookings['course_toDate']) &&
+                 strtotime($from_date) >= strtotime($row_bookings['course_fromDate']) &&
+                 strtotime($to_date)  >= strtotime($row_bookings['course_toDate'])                                                          
+                ) {
+                $bookings=false;
+            }
+        }
+    }
+    return $bookings;
+}
+
 //
 // if you are a student you can book this course
 //
@@ -116,6 +161,7 @@ if (mysqli_num_rows($result) == 0) {
     die();
 }
 
+
 $cards = "";
 if ($result) {
     while ($row = mysqli_fetch_assoc($result)) {
@@ -151,7 +197,7 @@ if ($result) {
                     </div>
                 </div>
             </div>";
-        if (isset($_SESSION["STUDENT"])) {
+        if (isset($_SESSION["STUDENT"]) && check_booking($_SESSION["STUDENT"],$row['fromDate'],$row['ToDate'])) {
             $cards .= "<form method='post'>
                 <input type='submit' value='Book this course' name='BookCourse' class='btn btn-primary'>
                 <span class='text-danger'><?= $bcError ?></span>
