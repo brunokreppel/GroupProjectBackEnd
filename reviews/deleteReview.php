@@ -21,7 +21,7 @@ if (isset($_SESSION["STUDENT"])) {
         $sql1 = "DELETE FROM `reviews` WHERE `id` = $id";
         mysqli_query($conn, $sql1);
 
-        header("Location: ../dashboard.php");
+        header("Location: userReview.php");
 
     } else {
     header("Location: ../index.php");
