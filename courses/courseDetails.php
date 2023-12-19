@@ -23,9 +23,13 @@ function check_booking ($user_id, $from_date, $to_date) {
 
     $bookings=true; // variable returns false if there are already bookings and they overlap with the given timeframe
 
-    $now = date('Y-m-d');
-    if (strtotime($now) > strtotime($to_date) ||
-       (strtotime($now) > strtotime($from_date) && strtotime($now) <= strtotime($to_date))
+    //
+    // don't book a course in the past
+    //
+    $now = date('Ymd');
+    if (
+        $now > date('Ymd', strtotime($to_date)) ||
+       ($now > date('Ymd', strtotime($from_date)) && $now <= date('Ymd', strtotime($to_date)))
     )
     {
         $bookings=false;
@@ -50,24 +54,24 @@ function check_booking ($user_id, $from_date, $to_date) {
         //
         // bookings exist, check if their timeframes are out of range
         //
+
         while ($row_bookings = mysqli_fetch_assoc($user_bookings)) {
-            if ( strtotime($from_date) <= strtotime($row_bookings['course_fromDate']) &&
-                 strtotime($to_date) >= strtotime($row_bookings['course_fromDate']) &&
-                 strtotime($to_date)  <= strtotime($row_bookings['course_toDate'])
-              ) {
-                $bookings=false;
-            }
-            if ( strtotime($from_date) <= strtotime($row_bookings['course_toDate']) &&
-                 strtotime($from_date) >= strtotime($row_bookings['course_fromDate']) &&
-                 strtotime($to_date)  >= strtotime($row_bookings['course_toDate'])                                                          
+         
+            if ( 
+                 date('Ymd', strtotime($from_date)) <= date('Ymd', strtotime($row_bookings['course_fromDate'])) &&
+                 date('Ymd', strtotime($to_date)) >= date('Ymd', strtotime($row_bookings['course_fromDate'])) &&
+                 date('Ymd', strtotime($to_date))  <= date('Ymd', strtotime($row_bookings['course_toDate']))
                 ) {
                 $bookings=false;
             }
-            if ( strtotime($from_date) <= strtotime($row_bookings['course_fromDate']) &&
-                 strtotime($to_date) <= strtotime($row_bookings['course_toDate'])
-               ) {
+            if ( 
+                 date('Ymd', strtotime($from_date)) <= date('Ymd', strtotime($row_bookings['course_toDate'])) &&
+                 date('Ymd', strtotime($from_date)) >= date('Ymd', strtotime($row_bookings['course_fromDate'])) &&
+                 date('Ymd', strtotime($to_date))  >= date('Ymd', strtotime($row_bookings['course_toDate']))                                                          
+                ) {
                 $bookings=false;
             }
+
         } // endwhile
     }
     return $bookings;

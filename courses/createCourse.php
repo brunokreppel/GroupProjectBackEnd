@@ -22,6 +22,15 @@ function check_course ($user_id, $from_date, $to_date) {
     //
     $courses=true; // variable returns false if there are already courses and they overlap with the given timeframe
 
+    //
+    // don't create a course in the past
+    //
+    $now = date('Ymd');
+    if ($now > date('Ymd', strtotime($from_date)))
+    {
+        $courses=false;
+    }
+
     $sql = "SELECT  course.id AS course_id,
                     course.fromDate AS course_fromDate,
                     course.ToDate AS course_toDate
@@ -40,15 +49,17 @@ function check_course ($user_id, $from_date, $to_date) {
         // courses exist, check if their timeframes are in this range
         //
         while ($row_courses = mysqli_fetch_assoc($user_courses)) {
-            if ( strtotime($from_date) <= strtotime($row_courses['course_fromDate']) &&
-                 strtotime($to_date) >= strtotime($row_courses['course_fromDate']) &&
-                 strtotime($to_date)  <= strtotime($row_courses['course_toDate'])
+            if ( 
+                 date('Ymd', strtotime($from_date)) <= date('Ymd', strtotime($row_courses['course_fromDate'])) &&
+                 date('Ymd', strtotime($to_date)) >= date('Ymd', strtotime($row_courses['course_fromDate'])) &&
+                 date('Ymd', strtotime($to_date))  <= date('Ymd', strtotime($row_courses['course_toDate']))
               ) {
                 $courses=false;
             }
-            if ( strtotime($from_date) <= strtotime($row_courses['course_toDate']) &&
-                 strtotime($from_date) >= strtotime($row_courses['course_fromDate']) &&
-                 strtotime($to_date)  >= strtotime($row_courses['course_toDate'])                                                          
+            if ( 
+                 date('Ymd', strtotime($from_date)) <= date('Ymd', strtotime($row_courses['course_toDate'])) &&
+                 date('Ymd', strtotime($from_date)) >= date('Ymd', strtotime($row_courses['course_fromDate'])) &&
+                 date('Ymd', strtotime($to_date))  >= date('Ymd', strtotime($row_courses['course_toDate']))                                                          
                 ) {
                 $courses=false;
             }
@@ -91,7 +102,7 @@ if (isset($_SESSION["ADM"]) || isset($_SESSION["TUTOR"])) {
             // courses in the given timeframe exist
             //
             $error = true;
-            $dateError = "A course in the given timeframe already exists ! Choose a different timeframe";
+            $dateError = "A course in the given timeframe already exists ! Choose a different timeframe/Don't create a course in the past";
         }
 
         // Validate price
