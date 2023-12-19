@@ -130,7 +130,7 @@ if ($result) {
             title: '$subject_name',
             start: '$fromDate',
             end: '$ToDate',
-            url: 'courses/courseDetails.php?id=$course_id',
+            url: '../courses/courseDetails.php?id=$course_id',
         },
         ";
         
