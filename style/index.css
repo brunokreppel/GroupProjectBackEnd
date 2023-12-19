@@ -129,6 +129,11 @@
 .swiper-pagination-bullet{
 background:black !important ;
 }
+
+.fa-li{
+  font-size: 18px;
+}
+
 @media (max-width: 900px) {
 
 
