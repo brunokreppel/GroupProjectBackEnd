@@ -6,42 +6,108 @@
     color: var(--primary-blue);
   }
 
+  /* about section */
   .about_wrapper {
     background-color: var(--primary-white);
-    height: 100vh;
+    height: 680px;
     display: grid;
     grid-template-columns: 1fr 1fr; 
     gap: 50px; 
   }
-  .services_wrapper{
-    background-color: var(--secondary-white);
-    height: 70dvh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 
-  }
 
   .about_container{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    border: 1px solid black;
   }
 
+  .laptop{
+    height: 400px;
+  }
+  .text{
+    width: 70%;
+  }
+  @media only screen and (max-width: 1200px) {
+    .laptop{
+      height: 350px;
+    }
+    .text{
+      width: 80%;
+    }
+
+}
+
+@media only screen and (max-width: 1050px) {
+ 
+  .about_wrapper {
+ 
+    grid-template-columns: 1fr; 
+    height: 1100px;
+    
+    gap: 0px;
+    
+  }
+}
+ 
+  @media only screen and (max-width: 800px) {
+ 
+    .about_wrapper {
+   
+      grid-template-columns: 1fr; 
+      height: 1000px;
+      
+      gap: 0px;
+      
+    }
+  
+}
+
+@media only screen and (max-width: 500px) {
+ 
+  .about_wrapper {
+ 
+    grid-template-columns: 1fr; 
+    height: 880px;
+    gap: 0px;
+  
+    
+  }
+
+}
+
+    /* about section */
+
   .services_container{
-    height: 90dvh;
+    height: fit-content;
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  .services_wrapper{
+    padding-top: 50px;
+    background-color: var(--secondary-white);
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
   }
 
   .services_card{
     width: 300px;
   }
   
+  @media only screen and (max-width: 768px) {
 
+
+    .services_card{
+      width: auto;
+    }
+  
+}
   .uni_wrapper{
     background-color: var(--secondary-white);
     height: 250px;
@@ -129,11 +195,6 @@
 .swiper-pagination-bullet{
 background:black !important ;
 }
-
-.fa-li{
-  font-size: 18px;
-}
-
 @media (max-width: 900px) {
 
 

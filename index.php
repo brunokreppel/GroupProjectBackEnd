@@ -50,7 +50,7 @@ mysqli_close($conn);
     <link rel="stylesheet" href="style/index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@300;400;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" crossorigin="">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -66,18 +66,18 @@ mysqli_close($conn);
     <div class="about_wrapper">
         <div class="about_container">
         <p class="mb-4">
-            <div style="width: 60%;">
-            <h1>About Us</h1>
+            <div class="text">
+            <h1 style="font-weight: 700;">About Us</h1>
             <br>
-            <p>
+            <p class="fw-light">
                 Established in 2021, Modern Tuition is dedicated to providing a top-tier education at an affordable rate for all families.
             </p>
 
-            <p class="mb-4">
+            <p class="mb-4 fw-light">
                 Our team comprises more than 70 exceptionally skilled tutors, each thoroughly vetted through DBS checks and interviews, ensuring your peace of mind.
             </p>
 
-            <p class="mb-4">
+            <p class="mb-4 fw-light">
                 We specialize in online and in-person tuition, offering homeschooling services across all age groups and subjects. Additionally, we provide targeted GCSE revision courses for Mathematics, English, and Science.
             </p>
 
@@ -85,77 +85,55 @@ mysqli_close($conn);
 
             </div>
         </div>
-        <div class="about_container">
+        <div class="about_container" class="laptop">
             <img src="assets/laptop.svg" alt="">
         </div>
     </div>
 
     <div class="services_wrapper">
-    <div class="row g-4">
-        <div class="col-md-4 col-sm-12">
-            <div class="services_card">
-                <div class="card mb-4 rounded-3 shadow-sm">
-                    <div class="card-header py-3">
-                        <h4 class="my-0 fw-normal">Free</h4>
-                    </div>
-                    <div class="card-body">
-                        <h1 class="card-title pricing-card-title">$0<small class="text-body-secondary fw-light">/mo</small></h1>
-                        <ul class="list-unstyled mt-5 mb-5">
-                            <li>10 users included</li>
-                            <li>2 GB of storage</li>
-                            <li>Email support</li>
-                            <li>Help center access</li>
-                        </ul>
-                        <button type="button" class="w-100 btn btn-lg btn-outline-primary">Sign up for free</button>
-                    </div>
-                </div>
-            </div>
+    <div class="container px-4 py-5" id="featured-3">
+    <h1 style="font-weight: 700;">Features</h1>
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+      <div class="feature col">
+        <div class="d-inline-flex align-items-center justify-content-center fs-2 mb-3">
+        <i class="ri-book-read-line dashboard-icon"></i>
         </div>
-        <div class="col-md-4 col-sm-12">
-            <div class="services_card">
-                <div class="card mb-4 rounded-3 shadow-sm">
-                    <div class="card-header py-3">
-                        <h4 class="my-0 fw-normal">Free</h4>
-                    </div>
-                    <div class="card-body">
-                        <h1 class="card-title pricing-card-title">$0<small class="text-body-secondary fw-light">/mo</small></h1>
-                        <ul class="list-unstyled mt-5 mb-5">
-                            <li>10 users included</li>
-                            <li>2 GB of storage</li>
-                            <li>Email support</li>
-                            <li>Help center access</li>
-                        </ul>
-                        <button type="button" class="w-100 btn btn-lg btn-outline-primary">Sign up for free</button>
-                    </div>
-                </div>
-            </div>
+        <h3 class="fs-2 text-body-emphasis">Courses</h3>
+        <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+        <a href="#" class="icon-link text-decoration-none">
+          Call to action
+          <i class="ri-arrow-drop-right-line"></i>
+        </a>
+      </div>
+      <div class="feature col">
+      <div class="d-inline-flex align-items-center justify-content-center fs-2 mb-3">
+        <i class="ri-building-line dashboard-icon"></i>
         </div>
-        <div class="col-md-4 col-sm-12">
-            <div class="services_card">
-                <div class="card mb-4 rounded-3 shadow-sm">
-                    <div class="card-header py-3">
-                        <h4 class="my-0 fw-normal">Free</h4>
-                    </div>
-                    <div class="card-body">
-                        <h1 class="card-title pricing-card-title">$0<small class="text-body-secondary fw-light">/mo</small></h1>
-                        <ul class="list-unstyled mt-5 mb-5">
-                            <li>10 users included</li>
-                            <li>2 GB of storage</li>
-                            <li>Email support</li>
-                            <li>Help center access</li>
-                        </ul>
-                        <button type="button" class="w-100 btn btn-lg btn-outline-primary">Sign up for free</button>
-                    </div>
-                </div>
-            </div>
+        <h3 class="fs-2 text-body-emphasis">Universities</h3>
+        <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+        <a href="#" class="icon-link text-decoration-none">
+          Call to action
+          <i class="ri-arrow-drop-right-line"></i>
+        </a>
+      </div>
+      <div class="feature col">
+      <div class="d-inline-flex align-items-center justify-content-center fs-2 mb-3">
+      <i class="ri-question-answer-line"></i>        
         </div>
+        <h3 class="fs-2 text-body-emphasis">Reviews</h3>
+        <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+        <a href="#" class="icon-link text-decoration-none">
+          Call to action
+          <i class="ri-arrow-drop-right-line"></i>
+        </a>
+      </div>
     </div>
+  </div>
 </div>
 
 
 <div class="uni_wrapper">
-<h1 class="text-center fw-bold"> Universities </h1>
-<div class="uni_flex mt-5">
+<div class="uni_flex">
 <img src="assets/Logo_Anglo.png" alt="">
 <img src="assets/Logo_Charles.svg" alt="">
 <img src="assets/Logo_CTU.png" alt="">
