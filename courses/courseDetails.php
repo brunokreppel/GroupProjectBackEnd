@@ -20,7 +20,16 @@ function check_booking ($user_id, $from_date, $to_date) {
     //
     // check if there are any other bookings for this student in this timeframe
     //
+
     $bookings=true; // variable returns false if there are already bookings and they overlap with the given timeframe
+
+    $now = date('Y-m-d');
+    if (strtotime($now) > strtotime($to_date) ||
+       (strtotime($now) > strtotime($from_date) && strtotime($now) <= strtotime($to_date))
+    )
+    {
+        $bookings=false;
+    }
 
     $sql = "SELECT  booking.id AS booking_id,
                     course.id AS course_id,
@@ -54,7 +63,12 @@ function check_booking ($user_id, $from_date, $to_date) {
                 ) {
                 $bookings=false;
             }
-        }
+            if ( strtotime($from_date) <= strtotime($row_bookings['course_fromDate']) &&
+                 strtotime($to_date) <= strtotime($row_bookings['course_toDate'])
+               ) {
+                $bookings=false;
+            }
+        } // endwhile
     }
     return $bookings;
 }
