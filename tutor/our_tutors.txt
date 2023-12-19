@@ -65,3 +65,5 @@ name: Ivanna Podolsky
 email: ivanna_podolsky@mail.com
 pass: ivanna_podolsky123;
 Biochemistry;
+
+Pass of Students: 123321ST;
