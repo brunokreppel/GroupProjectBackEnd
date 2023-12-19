@@ -21,6 +21,10 @@ echo "
     color: #FFFFFF!important;
   }
 
+  ul li{
+    list-style: none;
+  } 
+
 </style>
 
 <div class='container my-5'>
@@ -32,7 +36,7 @@ echo "
         <div class='row mt-4'>
             <!--Grid column-->
             <div class='col-lg-4 col-md-12 mb-4 mb-md-0'>
-            <h5 class='text-uppercase mb-4'>Meet us</h5>
+            <h5 class='text-uppercase mb-4' style='margin-left: 1.65em;'>Meet us</h5>
 
                 <ul class='fa-ul' style='margin-left: 1.65em;'>
                     <li class='mb-3'>
@@ -49,7 +53,7 @@ echo "
                     </li>
                 </ul>
 
-                <div class='mt-4'>
+                <div class='mt-4'style='margin-left: 1.65em;'>
                     <!-- Facebook -->
                     <a type='button' class='btn btn-floating btn-light btn-lg'><i class='ri-facebook-fill'></i></a>
                     <!-- Linkedin -->
