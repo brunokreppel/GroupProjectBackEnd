@@ -36,7 +36,43 @@ if ($result) {
     echo "Error: " . mysqli_error($conn);
 }
 
+//
+// select all courses and put their information into an array for the calendar
+// 
+$sql = "SELECT course.id AS course_id,
+               course.fromDate AS fromDate,
+               course.ToDate AS ToDate,
+               course.fk_tutor_id,
+               subject.name AS subject_name
+        FROM `course`
+        JOIN subject ON course.fk_subject_id = subject.id";
 
+$result = mysqli_query($conn, $sql);
+$all_courses_calendar = "";
+
+
+if (($result) && (mysqli_num_rows($result) > 0)) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        $course_id = $row["course_id"];
+        $subject_name = $row["subject_name"];
+        $fromDate = date("Y-m-d", strtotime($row["fromDate"]));
+        $ToDate = new \DateTime($row["ToDate"]);
+        date_modify($ToDate, "+1 day");
+        $ToDate = date_format($ToDate, "Y-m-d");
+
+
+        $all_courses_calendar .= "
+        {
+            title: '$subject_name',
+            start: '$fromDate',
+            end: '$ToDate',
+            url: 'courses/courseDetails.php?id=$course_id',
+            backgroundColor: 'rgb(250,50,100)'
+        },
+        ";
+
+    }
+  }
 mysqli_close($conn);
 
 ?>
@@ -56,6 +92,25 @@ mysqli_close($conn);
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script src="https://kit.fontawesome.com/a32278c845.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            headerToolbar: {
+                center: 'dayGridMonth,dayGridWeek' // buttons for switching between views
+            },
+            events: [
+                <?php echo $all_courses_calendar ?>
+            ]
+        });
+        calendar.render();
+        });
+
+    </script>
     
 
 
@@ -150,6 +205,7 @@ mysqli_close($conn);
 
 </div>
 
+<div class='container w-75 h-75' id='calendar'></div>
 
  <!-- Swiper -->
  <div class="swiper mySwiper">
