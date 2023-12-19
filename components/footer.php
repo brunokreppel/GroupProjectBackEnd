@@ -2,86 +2,98 @@
 
 <?php
 echo "
+<div class='container my-5'>
 
-<footer bg-body-tertiary class='text-center mt-3'>
-  <!-- Grid container -->
-  <div class='container p-4 pb-0'>
-   
-  
-  <!-- Section: Social media -->
-    <section class='mb-4'>
+    <footer class='text-white text-center text-lg-start bg-dark'>
+        <!-- Grid container -->
+        <div class='container p-4'>
+            <!--Grid row-->
+            <div class='row mt-4'>
+                <!--Grid column-->
+                <div class='col-lg-4 col-md-12 mb-4 mb-md-0'>
+                    <h5 class='text-uppercase mb-4'>Contact</h5>
 
-      <!-- Facebook -->
-      <a
-      data-mdb-ripple-init
-        class='btn text-white btn-floating m-1'
-        style='background-color: #3b5998;'
-        href='#!'
-        role='button'
-        ><i class='ri-facebook-fill'></i></i
-      ></a>
+                    <ul class='fa-ul' style='margin-left: 1.65em;'>
+                        <li class='mb-3'>
+                            <span class='fa-li'><i class='fas fa-home'></i></span><span class='ms-2'>Karmeliterpl. 5/17,
+                                1020 Vienna</span>
+                        </li>
+                        <li class='mb-3'>
+                            <span class='fa-li'><i class='fas fa-envelope'></i></span><span
+                                class='ms-2'>tutorsphere@mail.com</span>
+                        </li>
+                        <li class='mb-3'>
+                            <span class='fa-li'><i class='fas fa-phone'></i></span><span class='ms-2'>+ 43 xxx xxx xx
+                                xx</span>
+                        </li>
+                    </ul>
 
-      <!-- Twitter -->
-      <a
-        data-mdb-ripple-init
-        class='btn text-white btn-floating m-1'
-        style='background-color: #55acee;'
-        href='#!'
-        role='button'
-        ><i class='ri-twitter-x-fill'></i></i
-      ></a>
+                    <div class='mt-4'>
+                        <!-- Facebook -->
+                        <a type='button' class='btn btn-floating btn-light btn-lg'><i class='fab fa-facebook-f'></i></a>
+                        <!-- Dribbble -->
+                        <a type='button' class='btn btn-floating btn-light btn-lg'><i
+                                class='fab fa-linkedin-in'></i></a>
+                        <!-- Twitter -->
+                        <a type='button' class='btn btn-floating btn-light btn-lg'><i class='fab fa-twitter'></i></a>
+                        <!-- Google + -->
+                        <a type='button' class='btn btn-floating btn-light btn-lg'><i
+                                class='fab fa-google-plus-g'></i></i></a>
+                        <!-- Linkedin -->
+                    </div>
+                </div>
+                <!--Grid column-->
 
-      <!-- Google -->
-      <a
-        data-mdb-ripple-init
-        class='btn text-white btn-floating m-1'
-        style='background-color: #dd4b39;'
-        href='#!'
-        role='button'
-        ><i class='ri-google-fill'></i></i
-      ></a>
+                <!--Grid column-->
+                <div class='col-lg-3 col-md-6 mb-4 mb-lg-0'>
+                    <h5 class='text-uppercase mb-4'>Sign up to our newsletter</h5>
 
-      <!-- Instagram -->
-      <a
-        data-mdb-ripple-init
-        class='btn text-white btn-floating m-1'
-        style='background-color: #ac2bac;'
-        href='#!'
-        role='button'
-        ><i class='ri-instagram-line'></i
-      ></a>
+                    <div class='form-outline form-white mb-4'>
+                        <input type='email' id='form5Example2' class='form-control' />
+                        <label class='form-label' for='form5Example2'>Email address</label>
+                    </div>
 
-      <!-- Linkedin -->
-      <a
-        data-mdb-ripple-init
-        class='btn text-white btn-floating m-1'
-        style='background-color: #0082ca;'
-        href='#!'
-        role='button'
-        ><i class='ri-linkedin-fill'></i
-      ></a>
-      <!-- Github -->
-      <a
-        data-mdb-ripple-init
-        class='btn text-white btn-floating m-1'
-        style='background-color: #333333;'
-        href='#!'
-        role='button'
-        ><i class='ri-github-line'></i
-      ></a>
-    </section>
-    <!-- Section: Social media -->
-  </div>
-  <!-- Grid container -->
+                    <button type='submit' class='btn btn-light btn-block'>Subscribe</button>
+                </div>
+                <!--Grid column-->
 
-  <!-- Copyright -->
-  <div class='text-center p-3' style='background-color: rgba(0, 0, 0, 0.05);'>
+                <!--Grid column-->
+                <div class='col-lg-4 col-md-6 mb-4 mb-md-0'>
+                    <h5 class='text-uppercase mb-4'>Opening hours</h5>
+
+                    <table class='table text-center text-white'>
+                        <tbody class='fw-normal'>
+                            <tr>
+                                <td>Mon - Wed:</td>
+                                <td>8am - 8pm</td>
+                            </tr>
+                            <tr>
+                                <td>Tue - Thu:</td>
+                                <td>10am - 6pm</td>
+                            </tr>
+                            <tr>
+                                <td>Fri - Sat:</td>
+                                <td>10am - 2pm</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!--Grid column-->
+            </div>
+        </div>
+        <!--Grid row-->
+</div>
+<!-- Grid container -->
+
+<!-- Copyright -->
+<div class='text-center p-3' style='background-color: rgba(0, 0, 0, 0.2);'>
     © 2023 Copyright:
-    <a class='text-body' href='#'>Tudors Sphere</a>
-  </div>
-  <!-- Copyright -->
+    <a class='text-white' href='#'>TutorSphere</a>
+</div>
+<!-- Copyright -->
 </footer>
 
+</div>
 ";
-
 ?>
+
