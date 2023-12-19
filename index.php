@@ -67,7 +67,6 @@ if (($result) && (mysqli_num_rows($result) > 0)) {
             start: '$fromDate',
             end: '$ToDate',
             url: 'courses/courseDetails.php?id=$course_id',
-            backgroundColor: 'rgb(250,50,100)'
         },
         ";
 
