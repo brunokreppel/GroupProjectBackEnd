@@ -74,6 +74,7 @@ $sql = "SELECT
 // Execute the query
 $result = mysqli_query($conn, $sql);
 $cards = "";
+$tutor_courses_calendar = "";
 
 // Check if the query was successful
 if ($result) {
@@ -114,6 +115,25 @@ if ($result) {
                 </ul>
             </div>
         </article>";
+        // fill the calendar with events as well
+
+        $course_id = $row["course_id"];
+        $subject_name = $row["subject_name"];
+        $fromDate = date("Y-m-d", strtotime($row["fromDate"]));
+        $ToDate = new \DateTime($row["ToDate"]);
+        date_modify($ToDate, "+1 day");
+        $ToDate = date_format($ToDate, "Y-m-d");
+
+
+        $tutor_courses_calendar .= "
+        {
+            title: '$subject_name',
+            start: '$fromDate',
+            end: '$ToDate',
+            url: 'courses/courseDetails.php?id=$course_id',
+        },
+        ";
+        
     }
 } else {
     // Display an error message if the query fails
@@ -137,6 +157,7 @@ mysqli_close($conn);
     <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" crossorigin="">
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
     <link rel="stylesheet" href="../style/card.css">
     <style>
         /* Custom styles */
@@ -171,6 +192,24 @@ mysqli_close($conn);
         </div>
     </section>
 
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            headerToolbar: {
+                center: 'dayGridMonth,dayGridWeek' // buttons for switching between views
+            },
+            events: [
+                <?php echo $tutor_courses_calendar ?>
+            ]
+        });
+        calendar.render();
+        });
+
+    </script>
+
     <section class="light">
         <div class="container py-5">
             <!-- Display course cards -->
@@ -179,6 +218,8 @@ mysqli_close($conn);
             <p id="noResultsMessage" class="text-center fw-bold">Nothing Found...</p>
         </div>
     </section>
+
+    <div class='container w-75 h-75' id='calendar'></div>
 
     <!-- Footer -->
     <?php require_once '../components/footer.php' ?>
