@@ -74,42 +74,12 @@ if (isset($_SESSION["STUDENT"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Review</title>
-    <link rel="stylesheet" href="style/rootstyles.css">
-    <link rel="stylesheet" href="style/index.css">
+    <link rel="stylesheet" href="../style/rootstyles.css">
+    <link rel="stylesheet" href="../style/review.css">
+    <link rel="stylesheet" href="../style/form.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" crossorigin="">
-
-    <style>
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 0.375rem 0.75rem;
-            font-size: 1rem;
-            line-height: 1.5;
-            border-radius: 0.25rem;
-            border: 1px solid #ced4da;
-        }
-        .star-rating {
-        font-size: 24px;
-        }
-        .star-rating i {
-            cursor: pointer;
-            color: #ddd;
-        }
-        .star-rating i:hover,
-        .star-rating i.active {
-            color: #ffcc00;
-        }
-    </style>
 </head>
 <body>
 
@@ -122,7 +92,14 @@ if (isset($_SESSION["STUDENT"])) {
         </div>
     <?php endif; ?>
 
-    <h3 class="text-center">Update review</h3>
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+            <h3 class="text-center">Update review</h3>
+            </div>
+        </div>
+    </section>
+    
     <form method="POST" name="updateForm">
             <label>ID: <?php echo $id; ?></label>
             <input type="hidden" name="id" value="<?php echo $id; ?>">
@@ -179,8 +156,8 @@ if (isset($_SESSION["STUDENT"])) {
         </div>
 
         
-        <button name="update" type="submit" class="btn btn-primary">Update review</button>
-        <a href='userReview.php' class='btn-link text-decoration-none text-reset'><button type='button' class='btn btn-outline-secondary mx-2'>Back</button></a>
+        <button name="update" type="submit" class="btn btn-primary updateReview">Update review</button>
+        <a href='userReview.php' class='btn-link text-decoration-none text-reset'><button type='button' class='btn btn-outline-secondary my-2 updateReview'>Back</button></a>
     </form>
 
 </div>

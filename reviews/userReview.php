@@ -41,24 +41,27 @@ if ($result) {
         }
  
         $cards .= " 
-        <div class='card text-bg-light mb-3'>
-            <div class='card-header'>
+        <div class='card mb-3 px-0'>
+            <div class='card-header headerReview'>
                 <div class='star-rating'>
                 " . $ratingStars ."
                 </div>
             </div>
-            <div class='card-body'>
+            <div class='reviewBody'>
+                <div class='card-body'>
                 <h5 class='card-title'>{$row['subject_name']}</h5>
                 <blockquote class='card-text blockquote'>
                     <p class='card-text fst-italic ms-3'>{$row['review_message']}</p>
                 </blockquote>
                 <p class='card-text'>{$row['review_creation_date']}</p>
                 <p class='card-text'>From: {$row['user_firstName']} {$row['user_lastName']}</p>
+                </div>
+                <div class='btn-group mb-2'>
+                    <a href='updateReview.php?id={$row['review_id']}' class='btn-link text-decoration-none text-reset updateReview'><button type='button' class='btn btn-outline-warning mx-2'>Update</button></a>
+                    <a href='deleteReview.php?id={$row['review_id']}' class='btn-link text-decoration-none text-reset updateReview'><button type='button' class='btn btn-outline-danger mx-2'>Delete</button></a>
             </div>
-            <div class='btn-group mb-2'>
-                <a href='updateReview.php?id={$row['review_id']}' class='btn-link text-decoration-none text-reset'><button type='button' class='btn btn-outline-warning mx-2'>Update</button></a>
-                <a href='deleteReview.php?id={$row['review_id']}' class='btn-link text-decoration-none text-reset'><button type='button' class='btn btn-outline-danger mx-2'>Delete</button></a>
             </div>
+
         </div> ";
     }
 } else {
@@ -78,25 +81,11 @@ mysqli_close($conn);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My reviews</title>
-    <link rel="stylesheet" href="style/rootstyles.css">
-    <link rel="stylesheet" href="style/index.css">
+    <link rel="stylesheet" href="../style/rootstyles.css">
+    <link rel="stylesheet" href="../style/review.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" crossorigin="">
-
-
-    <style>
-        .star-rating {
-        font-size: 1rem;
-        }
-        .star-rating i {
-            cursor: unset;
-            color: #ddd;
-        }
-        .star-rating i.active {
-            color: #ffcc00;
-        }
-    </style>
 </head>
 
 <body>
