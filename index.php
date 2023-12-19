@@ -21,7 +21,7 @@ if ($result) {
         <img src='assets/{$tutor['image']}' class='d-block carouselImg' alt='...'>
         </div>
             <div class='carousel_text'>
-                <a href='#'><h2 class='py-3 fw-bold'>{$tutor['firstName']} {$tutor['lastName']}</h4></a>
+                <a href='#'><h2 class='py-2 fw-bold'>{$tutor['firstName']} {$tutor['lastName']}</h4></a>
                 <p class='fw-light'>{$tutor['profile_info']}</p>
             </div>
         </div>
@@ -70,7 +70,7 @@ mysqli_close($conn);
             <h1 style="font-weight: 700;">About Us</h1>
             <br>
             <p class="fw-light">
-                Established in 2021, Modern Tuition is dedicated to providing a top-tier education at an affordable rate for all families.
+                Established in 2021, Tutore Sphere is dedicated to providing a top-tier education at an affordable rate for all families.
             </p>
 
             <p class="mb-4 fw-light">
@@ -91,8 +91,8 @@ mysqli_close($conn);
     </div>
 
     <div class="services_wrapper">
-    <div class="container px-4 py-5" id="featured-3">
-    <h1 style="font-weight: 700;">Features</h1>
+    <div class="container px-4 " id="featured-3">
+    <h1 style="font-weight: 700;" class="border-bottom">Features</h1>
     <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
       <div class="feature col">
         <div class="d-inline-flex align-items-center justify-content-center fs-2 mb-3">
@@ -100,8 +100,8 @@ mysqli_close($conn);
         </div>
         <h3 class="fs-2 text-body-emphasis">Courses</h3>
         <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-        <a href="#" class="icon-link text-decoration-none">
-          Call to action
+        <a href="courses/courses.php" class="icon-link text-decoration-none">
+        <span class="text-decoration-underline">View</span>
           <i class="ri-arrow-drop-right-line"></i>
         </a>
       </div>
@@ -111,8 +111,8 @@ mysqli_close($conn);
         </div>
         <h3 class="fs-2 text-body-emphasis">Universities</h3>
         <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-        <a href="#" class="icon-link text-decoration-none">
-          Call to action
+        <a href="university/universities.php" class="icon-link text-decoration-none">
+        <span class="text-decoration-underline">View</span>
           <i class="ri-arrow-drop-right-line"></i>
         </a>
       </div>
@@ -122,8 +122,8 @@ mysqli_close($conn);
         </div>
         <h3 class="fs-2 text-body-emphasis">Reviews</h3>
         <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-        <a href="#" class="icon-link text-decoration-none">
-          Call to action
+        <a href="reviews/reviews.php" class="icon-link text-decoration-none">
+        <span class="text-decoration-underline">View</span>
           <i class="ri-arrow-drop-right-line"></i>
         </a>
       </div>
@@ -132,13 +132,20 @@ mysqli_close($conn);
 </div>
 
 
-<div class="uni_wrapper">
-<div class="uni_flex">
-<img src="assets/Logo_Anglo.png" alt="">
+<div class="uni_wrapper pt-3">
+
+<div class="container border-top pt-5">
+    <h1 class="text-center pb-4" style="font-weight: 700;">Entrance Exam Success</h1>
+    <div class="uni_flex container">
+    <img src="assets/Logo_Anglo.png" alt="">
 <img src="assets/Logo_Charles.svg" alt="">
 <img src="assets/Logo_CTU.png" alt="">
 <img src="assets/Logo_Life.png" alt="">
 <img src="assets/Logo_NY.jpg" alt="">
+
+    </div>
+
+
 </div>
 
 </div>

@@ -100,23 +100,18 @@
     width: 300px;
   }
   
-  @media only screen and (max-width: 768px) {
-
-
-    .services_card{
-      width: auto;
-    }
-  
-}
+ 
   .uni_wrapper{
     background-color: var(--secondary-white);
-    height: 250px;
+    height: 325px;
+   
    
   }
   .uni_flex{
     display: flex;
     justify-content: space-around;
     align-items: center;
+    margin-top: 20px;
   }
   .uni_wrapper img{
     width: 100px;
@@ -125,10 +120,25 @@
   }
 
   
+  @media only screen and (max-width: 768px) {
 
+
+
+    .uni_flex img{
+      width: 70px;
+      height: 70px;
+    }
+    .uni_wrapper{
+      height: 260px;
+     
+   
+     
+    }
+}
   .review_wrapper{
     background-color: var(--primary-white);
-    height: 400px;
+    height: fit-content;
+    padding: 30px;
   }
 
 
@@ -165,7 +175,7 @@
   border-radius: 50%;
   object-fit: cover;
   position: absolute;
-  left: 50%;
+  left: 45%;
 }
 
 .carousel_text {
@@ -195,6 +205,28 @@
 .swiper-pagination-bullet{
 background:black !important ;
 }
+
+@media only screen and (max-width: 1250px) {
+
+ 
+
+  .carouselImg {
+   height: 250px;
+   width: 250px;
+   left: 35%;
+  }
+  .carousel_text{
+    font-size: 15px;
+    height: 230px;
+    width: 300px;
+
+  }
+
+  .swiper {
+    height: 350px;
+  }
+
+}
 @media (max-width: 900px) {
 
 
@@ -205,12 +237,70 @@ background:black !important ;
   }
 
   .carouselImg {
-    height: 150px;
-    width: 150px;
+    height: 200px;
+    width: 200px;
    
   }
  
  
   
   
+}
+
+@media (max-width: 692px) {
+
+
+  .carousel_text{
+   width: 250px;
+    
+
+  }
+
+  .carouselImg {
+    height: 150px;
+    width: 150px;
+   
+  }
+ 
+ 
+  .swiper {
+    height: 270px;
+  }
+  
+}
+
+@media (max-width: 585px) {
+
+
+  .carousel_text{
+   width: 160px;
+   height: 120px !important;
+    font-size: 10px;
+    margin-left: -15px ;
+  }
+
+  .carouselImg {
+    height: 120px;
+    width: 120px;
+    left: 20%;
+   
+  }
+ 
+ 
+  .swiper {
+    height: 250px;
+  }
+  .carousel_text h2{
+    font-size: 15px;
+   }
+.swiper-button-next,
+.swiper-button-prev {
+       width: 12px !important;
+   }
+
+   .swiper-button-next::after,
+.swiper-button-prev::after {
+       font-size: 28px !important;
+   }
+ 
 }
