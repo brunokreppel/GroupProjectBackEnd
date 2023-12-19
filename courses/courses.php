@@ -49,31 +49,47 @@ $result = mysqli_query($conn, $sql);
 $cards = "";
 
 if ($result) {
+    // Loop through the fetched results and build HTML cards
     while ($row = mysqli_fetch_assoc($result)) {
+        $cards .= "
+        <article class='postcard light blue test'>
+            <!-- Course Image -->
+            <a class='postcard__img_link' href='#'>
+                <img class='postcard__img' src='../assets/{$row['course_image']}' alt='Course Image' />
+            </a>
+            <div class='postcard__text t-dark'>
+                <!-- Course Title -->
+                <h1 class='postcard__title blue'><a href='courseDetails.php?id={$row['course_id']}'>{$row['subject_name']}</a></h1>
+                <div class='postcard__subtitle small'>
+                    <!-- Course Dates -->
+                    <time datetime='{$row['fromDate']}'>
+                        <i class='fas fa-calendar-alt mr-2'></i>From: " . date('F j, Y', strtotime($row['fromDate'])) . "
+                    </time>
+                    <time datetime='{$row['ToDate']}'>
+                        <i class='fas fa-calendar-alt mr-2'></i>To: " . date('F j, Y', strtotime($row['ToDate'])) . "
+                    </time>
+                </div>
+                <div class='postcard__bar'></div>
+                <!-- University Name -->
+                <div class='postcard__preview-txt fw-bold'>University: <span class='fw-light'>{$row['university_name']}</span></div>
+                <div class='postcard__preview-txt fw-bold'>Tutor: <span class='fw-light'>{$row['tutor_firstName']} {$row['tutor_lastName']}</span></div>
+                <div class='postcard__preview-txt fw-bold'>Price: <span class='fw-light'>{$row['price']}$</span></div>
 
-        $cards .= " <div class='col'>
-        <div class='card shadow-sm'>
-            <img src='../assets/{$row['course_image']}' class='bd-placeholder-img card-img-top' width='100%' height='225' role='img' alt='Course Image'>
-            <div class='card-body'>
-                <p class='card-text'>{$row['subject_name']}</p>
-                <p class='card-text'>{$row['university_name']}</p>
-                
-                <div class='d-flex justify-content-between align-items-center'>
-                    <div class='btn-group'>
-                        <a href='courseDetails.php?id={$row['course_id']}' class='btn-link text-decoration-none text-reset'><button type='button' class='btn btn-sm btn-outline-secondary'>Details</button></a>
-                        <a href='updateCourse.php?id={$row['course_id']}' class='btn-link text-decoration-none text-reset'><button type='button' class='btn btn-sm btn-outline-secondary'>Update</button></a>
-                    </div>
-                    <small class='text-body-secondary'>" . date('F j, Y', strtotime($row['fromDate'])) . "</small>
-                <small class='text-body-secondary'>" . date('F j, Y', strtotime($row['ToDate'])) . "</small>
-            </div>
-            </div>
-        </div>
-    </div>";
 
+                <!-- Actions: Details, Students, Update -->
+                <ul class='postcard__tagbox'>
+                    <li class='tag__item play blue'>
+                        <a href='../courses/courseDetails.php?id={$row['course_id']}'><i class='fas fa-play mr-2'></i>Details</a>
+                    </li>
+                    <li class='tag__item'>
+                        <a href='../courses/updateCourse.php?id={$row['course_id']}'><i class='fas fa-edit mr-2'></i>Update</a>
+                    </li>
+                </ul>
+            </div>
+        </article>";
     }
-
 } else {
-  
+    // Display an error message if the query fails
     echo "Error: " . mysqli_error($conn);
 }
 
@@ -87,45 +103,88 @@ mysqli_close($conn);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style/rootstyles.css">
-    <link rel="stylesheet" href="style/index.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" crossorigin="">
+    <link rel="stylesheet" href="../style/card.css">
 
+    <style>
+        /* Custom styles */
+        *{font-family: 'Bai Jamjuree', sans-serif;}
+        #noResultsMessage {
+            display: none;
+        }
+        .headerH1{
+            text-align: center;
+            font-size: 2.6rem !important;
+            font-weight: 700;
+            margin: 0 0 5px 0 !important;
+            color: black;
+        }
+        .iconH1{
+            font-size: 2.6rem;    
+        }
+    </style>
 </head>
 <body>
-    
-
-
-
-
-<section class="py-5 text-center container">
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">Courses</h1>
-        <p class="lead text-body-secondary">Something short and leading about the Courses below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
-        <p>
-          <a href="#" class="btn btn-primary my-2">Filter</a>
-          <a href="#" class="btn btn-secondary my-2">Filter</a>
-          <a href="#" class="btn btn-secondary my-2">Filter</a>
-          <a href="#" class="btn btn-secondary my-2">Filter</a>
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <div class="album py-5 bg-body-tertiary">
-    <div class="container">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">       
-      <?php echo $cards ?>
-      </div>
-    </div>
-  </div>
-
+    <section class="text-center container">
+        <div class="row">
+            <div class="col-lg-6 col-md-8 mx-auto mt-4">
+                <!-- Header -->
+                <h1 class="headerH1">All Courses <i class="ri-book-read-line iconH1"></i></h1>
+                <p class="lead text-body-secondary">Search for a Course you would like to participate in!</p>
+                <!-- Search input -->
+                <div class="container ">
+                    <input type="text" id="searchInput" class="form-control" placeholder="Search by course name...">
+                </div>
+            </div>
+        </div>
+    </section>
+  <section class="light">
+        <div class="container py-5">
+            <!-- Display course cards -->
+            <?php echo $cards ?>
+            <!-- No results message -->
+            <p id="noResultsMessage" class="text-center fw-bold">Nothing Found...</p>
+        </div>
+    </section>
 
 
   <?php require_once '../components/footer.php' ?>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> 
+    <!-- Custom script for search functionality -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const searchInput = document.getElementById("searchInput");
+            const cards = document.querySelectorAll(".test");
+            const noResultsMessage = document.getElementById("noResultsMessage");
+
+            // Set the initial state to 'none'
+            noResultsMessage.style.display = 'none';
+
+            function performSearch() {
+                const query = searchInput.value.trim().toLowerCase();
+                let foundResults = false;
+
+                cards.forEach(card => {
+                    const cardText = card.textContent.toLowerCase();
+                    const match = cardText.includes(query);
+                    card.style.display = match ? 'flex' : 'none';
+
+                    if (match) {
+                        foundResults = true;
+                    }
+                });
+
+                // Toggle the display of the noResultsMessage based on search results
+                noResultsMessage.style.display = foundResults ? 'none' : 'block';
+            }
+
+            searchInput.addEventListener("input", performSearch);
+        });
+    </script>   
 </body>
 </html>
     
