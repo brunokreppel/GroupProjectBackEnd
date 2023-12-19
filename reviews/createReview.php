@@ -60,42 +60,14 @@ if (isset($_SESSION["STUDENT"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Review</title>
-    <link rel="stylesheet" href="style/rootstyles.css">
-    <link rel="stylesheet" href="style/index.css">
+    <link rel="stylesheet" href="../style/rootstyles.css">
+    <link rel="stylesheet" href="../style/review.css">
+    <link rel="stylesheet" href="../style/form.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@300;400;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a32278c845.js" crossorigin="anonymous"></script>
-    <style>
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 0.375rem 0.75rem;
-            font-size: 1rem;
-            line-height: 1.5;
-            border-radius: 0.25rem;
-            border: 1px solid #ced4da;
-        }
-        .star-rating {
-            font-size: 24px;
-        }
-
-        .star-rating i {
-            cursor: pointer;
-            color: #ddd;
-        }
-        .star-rating i:hover,
-        .star-rating i.active {
-            color: #ffcc00;
-        }
-    </style>
 </head>
 <body>
 
@@ -108,7 +80,14 @@ if (isset($_SESSION["STUDENT"])) {
         </div>
     <?php endif; ?>
 
-    <h3 class="text-center py-3">Review</h3>
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+            <h3 class="text-center">Review</h3>
+            </div>
+        </div>
+    </section>
+    
     <form method="POST">
 
         <div class="form-group">
@@ -197,7 +176,7 @@ if (isset($_SESSION["STUDENT"])) {
         mysqli_close($conn);
         ?>
         
-        <button name="create" type="submit" class="btn btn-primary">Create a review</button>
+        <button name="create" type="submit" class="btn btn-primary updateReview">Create a review</button>
     </form>
 
 </div>
