@@ -3,7 +3,7 @@ echo "
 <style>
     /* Styles for navbar links on hover */
     .navbar-nav a:hover {
-        color: #800e13 !important;
+        color: #232389 !important;
     }
 
     /* Custom class for the second ul element */
@@ -20,7 +20,7 @@ echo "
     }
 </style>
 
-<nav class='navbar navbar-expand-lg navbar-light' style='background-color: #fefefe;'>
+<nav class='navbar navbar-expand-lg navbar-light' style='background-color: #fefefe;         box-shadow: 0 0.1px 5px rgba(0, 0, 0, 0.2);'>
     <div class='container-fluid'>
         <a class='navbar-brand' href='{$loc}index.php'>TutorSphere</a>
         <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarNav'
