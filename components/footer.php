@@ -6,11 +6,14 @@ echo "
 <style>
 
  .footer{
-  font-family: 'Bai Jamjuree', sans-serif!important;
+    font-family: 'Bai Jamjuree', sans-serif!important;
   } 
-
-  *{
-    font-family: 'Bai Jamjuree', sans-serif !important;
+  
+  [class^='ri-'], [class*=' ri-']{
+    font-family: 'remixicon' !important;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   .copyright{
@@ -27,7 +30,7 @@ echo "
 
 </style>
 
-<div class='container my-5'>
+<div class='my-5'>
 
     <footer class='text-white text-center text-lg-start bg-dark myFooter'>
     <!-- Grid container -->
@@ -36,7 +39,7 @@ echo "
         <div class='row mt-4'>
             <!--Grid column-->
             <div class='col-lg-4 col-md-12 mb-4 mb-md-0'>
-            <h5 class='text-uppercase mb-4' style='margin-left: 1.65em;'>Meet us</h5>
+            <h5 class='text-uppercase mb-4'>Meet us</h5>
 
                 <ul class='fa-ul' style='margin-left: 1.65em;'>
                     <li class='mb-3'>
@@ -53,7 +56,7 @@ echo "
                     </li>
                 </ul>
 
-                <div class='mt-4'style='margin-left: 1.65em;'>
+                <div class='mt-4'>
                     <!-- Facebook -->
                     <a type='button' class='btn btn-floating btn-light btn-lg'><i class='ri-facebook-fill'></i></a>
                     <!-- Linkedin -->

@@ -76,14 +76,16 @@ if (isset($_SESSION["STUDENT"])) {
     <title>Update Review</title>
     <link rel="stylesheet" href="../style/rootstyles.css">
     <link rel="stylesheet" href="../style/review.css">
-    <link rel="stylesheet" href="../style/form.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" crossorigin="">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a32278c845.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
-<div class="container">
+<div class="container formContainer" style="max-width: 600px !important">
 
      <!-- Display record creation message -->
      <?php if (!empty($recordMessage)) : ?>
@@ -91,18 +93,14 @@ if (isset($_SESSION["STUDENT"])) {
             <?php echo $recordMessage; ?>
         </div>
     <?php endif; ?>
-
-    <section class="py-5 text-center container">
-        <div class="row py-lg-5">
-            <div class="col-lg-6 col-md-8 mx-auto">
-            <h3 class="text-center">Update review</h3>
-            </div>
-        </div>
-    </section>
     
-    <form method="POST" name="updateForm">
-            <label>ID: <?php echo $id; ?></label>
-            <input type="hidden" name="id" value="<?php echo $id; ?>">
+    <form method="POST" name="updateForm" class="px-1">
+    <h2 class="fw-bold text-center mb-3">Update Review</h2>
+
+        <div class="d-flex justify-content-center">
+        <label>ID: <?php echo $id; ?></label>
+            <input type="hidden" name="id" class="reviewID"value="<?php echo $id; ?>">
+        </div>
 
         <div class="form-group">
             <label for="rating" class="form-label">Rating:</label>
@@ -123,9 +121,9 @@ if (isset($_SESSION["STUDENT"])) {
         </div>
 
         
-        <div class="form-group">
+        <div class="form-group mb-2">
             <label for="course_id">Select a Course:</label>
-            <select name="course_id" class="form-select" required>
+            <select name="course_id" class="form-select mt-2" required>
                 <?php
 
                 if (!$conn) {
@@ -143,10 +141,10 @@ if (isset($_SESSION["STUDENT"])) {
 
                 $result = mysqli_query($conn, $sql);
                 if ($result) {
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        $subjectId = $row['course_id'];
-                        $subjectName = $row['subject_name'];
-                        $selected = ($row['course_id'] == $subjectId) && ($row['subject_name'] == $subjectName) ? 'selected' : '';
+                    while ($rowSubjects = mysqli_fetch_assoc($result)) {
+                        $subjectId = $rowSubjects['course_id'];
+                        $subjectName = $rowSubjects['subject_name'];
+                        $selected = ($course_id == $subjectId) ? 'selected' : '';
                         echo '<option value="' . $subjectId . '" ' . $selected . '>' . $subjectName . '</option>';
                     }
                     mysqli_free_result($result);
@@ -156,8 +154,7 @@ if (isset($_SESSION["STUDENT"])) {
         </div>
 
         
-        <button name="update" type="submit" class="btn btn-primary updateReview">Update review</button>
-        <a href='userReview.php' class='btn-link text-decoration-none text-reset'><button type='button' class='btn btn-outline-secondary my-2 updateReview'>Back</button></a>
+        <button name="update" type="submit" class="btn btn-primary mt-3">Update review</button>
     </form>
 
 </div>

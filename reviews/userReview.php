@@ -41,28 +41,34 @@ if ($result) {
         }
  
         $cards .= " 
-        <div class='card mb-3 px-0'>
-            <div class='card-header headerReview'>
-                <div class='star-rating'>
+
+        <div class='col-xl-4 mt-4'>
+            <div class='position-relative text-center text-muted bg-body border border-dashed rounded-5 CstmContainerU'>
+            <div class='reviewBorder'>
+                <div class='star-rating py-2'>
                 " . $ratingStars ."
                 </div>
-            </div>
-            <div class='reviewBody'>
-                <div class='card-body'>
-                <h5 class='card-title'>{$row['subject_name']}</h5>
-                <blockquote class='card-text blockquote'>
-                    <p class='card-text fst-italic ms-3'>{$row['review_message']}</p>
-                </blockquote>
-                <p class='card-text'>{$row['review_creation_date']}</p>
-                <p class='card-text'>From: {$row['user_firstName']} {$row['user_lastName']}</p>
+                <h1 class='text-body-emphasis CstmH1'>{$row['subject_name']}</h1>
+                <p class='col-lg-8 mx-auto mb-4 fst-italic reviewP'>
+                    {$row['review_message']}
+                </p>
+                <div class='d-flex justify-content-center p-2'>
+                    <div>
+                        <p class='card-text'>{$row['review_creation_date']}</p>
+                        <p class='card-text reviewFrom'>From: {$row['user_firstName']} {$row['user_lastName']}</p>                            
+                    </div>
                 </div>
-                <div class='btn-group mb-2'>
-                    <a href='updateReview.php?id={$row['review_id']}' class='btn-link text-decoration-none text-reset updateReview'><button type='button' class='btn btn-outline-warning mx-2'>Update</button></a>
-                    <a href='deleteReview.php?id={$row['review_id']}' class='btn-link text-decoration-none text-reset updateReview'><button type='button' class='btn btn-outline-danger mx-2'>Delete</button></a>
+                <div class='d-flex justify-content-center'>
+                        <div class='mb-5'>
+                            <a href='updateReview.php?id={$row['review_id']}' class='UpdateR mb-4 mx-2'>Update</a>
+                            <a href='deleteReview.php?id={$row['review_id']}' class='DeleteR  mb-4 mx-2'>Delete</a>
+                        </div>
+                    </div>
             </div>
             </div>
-
-        </div> ";
+        </div>
+        
+        ";
     }
 } else {
 
@@ -86,26 +92,20 @@ mysqli_close($conn);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a32278c845.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
- 
-    <section class="py-5 text-center container">
-        <div class="row py-lg-5">
-            <div class="col-lg-6 col-md-8 mx-auto">
-                <h1 class="fw-light">My reviews</h1>
-            </div>
-        </div>
-    </section>
 
-    <div class="album py-5 bg-body-tertiary">
-        <div class="container">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    <div class="container mb-5">
+        <h1 class="headerH1">My reviews <i class="ri-double-quotes-l"></i></h1>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            
                 <?= $cards ?>
-            </div>
+            
         </div>
     </div>
-
 
 
     <?php require_once '../components/footer.php' ?>

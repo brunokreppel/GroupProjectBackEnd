@@ -1,6 +1,5 @@
 
 
-
 <?php
 
 session_start();
@@ -48,21 +47,27 @@ if (isset($_GET["id"])) {
             }
     
             $cards .= " 
-            <div class='card text-bg-light mb-3'>
-                <div class='card-header'>
-                    <div class='star-rating'>
+            <div class='col-xl-4 mt-4'>
+                <div class='position-relative text-center text-muted bg-body border border-dashed rounded-5 CstmContainer'>
+                <div class='reviewBorder'>
+                    <div class='star-rating py-2'>
                     " . $ratingStars ."
                     </div>
+                    <h1 class='text-body-emphasis CstmH1'>{$row['subject_name']}</h1>
+                    <p class='col-lg-8 mx-auto mb-4 fst-italic reviewP'>
+                        {$row['review_message']}
+                    </p>
+                    <div class='d-flex justify-content-center p-2'>
+                        <div>
+                            <p class='card-text'>{$row['review_creation_date']}</p>
+                            <p class='card-text reviewFrom'>From: {$row['user_firstName']} {$row['user_lastName']}</p>                            
+                        </div>
+                    </div>
                 </div>
-                <div class='card-body'>
-                    <h5 class='card-title'>{$row['subject_name']}</h5>
-                    <blockquote class='card-text blockquote'>
-                        <p class='card-text fst-italic ms-3'>{$row['review_message']}</p>
-                    </blockquote>
-                    <p class='card-text'>{$row['review_creation_date']}</p>
-                    <p class='card-text'>From: {$row['user_firstName']} {$row['user_lastName']}</p>
                 </div>
-            </div> ";
+            </div>
+
+            ";
         }
     } else {
 
@@ -105,23 +110,15 @@ mysqli_close($conn);
 
 <body>
  
-    <section class="py-5 text-center container">
-        <div class="row py-lg-5">
-            <div class="col-lg-6 col-md-8 mx-auto">
-                <h1 class="fw-light">Course reviews</h1>
-            </div>
-        </div>
-    </section>
 
-    <div class="album py-5 bg-body-tertiary">
-        <div class="container">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    <div class="container mb-5">
+        <h1 class="headerH1">Course reviews <i class="ri-double-quotes-l"></i></h1>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            
                 <?= $cards ?>
-            </div>
+                
         </div>
-        <a href='../courses/courses.php' class='btn-link text-decoration-none text-reset'><button type='button' class='btn btn-outline-secondary mx-2'>Back</button></a>
     </div>
-
 
 
     <?php require_once '../components/footer.php' ?>
