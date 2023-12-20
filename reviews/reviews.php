@@ -100,7 +100,7 @@ mysqli_close($conn);
 <body>
  
 
-    <div class="container mb-5 mt-4">
+<div class="container mb-5 mt-4" style='min-height: 83dvh;'>
         <h1 class="headerH1 pb-5">Reviews <i class="ri-double-quotes-l"></i></h1>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             

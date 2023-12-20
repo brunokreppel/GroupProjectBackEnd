@@ -52,7 +52,7 @@ if ($result) {
     // Loop through the fetched results and build HTML cards
     while ($row = mysqli_fetch_assoc($result)) {
         $cards .= "
-        <article class='postcard light blue test'>
+        <article class='postcard light blue test mx-auto'>
             <!-- Course Image -->
             <a class='postcard__img_link' href='#'>
                 <img class='postcard__img' src='../assets/{$row['course_image']}' alt='Course Image' />

@@ -81,7 +81,7 @@ if ($result) {
     // Loop through the fetched results and build HTML cards
     while ($row = mysqli_fetch_assoc($result)) {
         $cards .= "
-        <article class='postcard light blue test'>
+        <article class='postcard light blue test mx-auto'>
             <!-- Course Image -->
             <a class='postcard__img_link' href='#'>
                 <img class='postcard__img' src='../assets/{$row['course_image']}' alt='Course Image' />
@@ -152,6 +152,8 @@ mysqli_close($conn);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Courses</title>
     <!-- Fonts and stylesheets -->
+    <link rel="stylesheet" href="../style/rootstyles.css">
+    <link rel="stylesheet" href="../style/index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@300;400;700&display=swap" rel="stylesheet">
@@ -175,6 +177,120 @@ mysqli_close($conn);
         .iconH1{
             font-size: 2.6rem;    
         }
+             /* Custom styles for the calendar */
+      .formContainer {
+        max-width: 1000px !important;
+        max-height: 100dvh;
+        margin: 50px auto 50px auto;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        padding: 40px;
+        border-radius: 8px;
+        background-color: var(--primary-white);
+    }
+            #calendar {
+                margin: 0 auto;
+               
+            }
+      
+            .fc-day-header {
+                background-color: #007bff;
+                color: black;
+                font-weight: 700;
+            }
+    
+            .fc-event {
+                background-color: var(--primary-blue);
+                border: none;
+            }
+    
+            .fc-event-title {
+                color: #fff;
+            }
+            .fc .fc-col-header-cell-cushion {
+      display: inline-block;
+      padding: 2px 4px;
+      color: black;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .fc .fc-daygrid-day-number {
+      padding: 4px;
+      position: relative;
+      z-index: 4;
+      color: black;
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .fc .fc-toolbar-title {
+    
+      margin: 0px;
+      font-weight: 700;
+      padding: 15px;
+    }
+    .fc-direction-ltr .fc-button-group > .fc-button:not(:last-child) {
+      border-bottom-right-radius: 0px;
+      border-top-right-radius: 0px;
+      background-color: var(--primary-blue);
+      border: none;
+      
+    }
+    .fc-button:focus,
+    .fc-button:active,
+    .fc-button:hover {
+      outline: none !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+    .fc-direction-ltr .fc-button-group > .fc-button:not(:first-child) {
+      border-bottom-left-radius: 0px;
+      border-top-left-radius: 0px;
+      margin-left: -1px;
+      background-color: var(--primary-blue);
+      border: none;
+    }
+    .fc-direction-ltr .fc-button-group > .fc-button:not(:first-child):hover {
+        background-color: #187be4;
+    
+    }
+    .fc-direction-ltr .fc-button-group > .fc-button:not(:last-child):hover {
+    background-color: #187be4;
+    }
+    /* New styles for smaller screens */
+    @media (max-width: 760px) {
+        .fc-header-toolbar {
+        
+        gap: 15px;
+        margin-top: -20px;
+    }
+    .fc .fc-toolbar-title{
+        font-size: 14px;
+    }
+    
+        #calendar .fc-button {
+            font-size: 12px; /* Adjust the font size as needed */
+            padding: 5px 10px; /* Adjust the padding as needed */
+        }
+    
+        .fc .fc-daygrid-day-number {
+      font-size: 10px;
+    }
+    }
+    /* New styles for smaller screens */
+    @media (max-width: 580px) {
+    
+        .fc .fc-toolbar-title{
+        font-size: 12px;
+    }
+    
+        #calendar .fc-button {
+            font-size: 8px; /* Adjust the font size as needed */
+            padding: 2px 2px; /* Adjust the padding as needed */
+        }
+        .fc-daygrid-block-event .fc-event-time, .fc-daygrid-block-event .fc-event-title{
+            font-size: 10px;
+        }
+       
+    }
     </style>
 </head>
 <body>
@@ -219,7 +335,7 @@ mysqli_close($conn);
         </div>
     </section>
 
-    <div class='container w-75 h-75' id='calendar'></div>
+    <div class='container formContainer' id='calendar'></div>
 
     <!-- Footer -->
     <?php require_once '../components/footer.php' ?>
