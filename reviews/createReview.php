@@ -8,7 +8,7 @@ require_once "../components/navbar.php";
 $loggedInStudentId = $_SESSION["STUDENT"];
 
 if(!isset($_SESSION["STUDENT"])){
-    header("Location: ../index.php");
+    header("Location: ../user/userProfile.php");
     die();
 }
 
