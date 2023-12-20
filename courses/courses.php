@@ -80,10 +80,18 @@ if ($result) {
                 <ul class='postcard__tagbox'>
                     <li class='tag__item play blue'>
                         <a href='../courses/courseDetails.php?id={$row['course_id']}'><i class='fas fa-play me-2'></i>Details</a>
-                    </li>
-                    <li class='tag__item'>
+                    </li>";
+
+                    if (isset($_SESSION["TUTOR"]) || isset($_SESSION["ADM"])) {
+                        $cards .= "
+                        <li class='tag__item'>
                         <a href='../courses/updateCourse.php?id={$row['course_id']}'><i class='fas fa-edit me-2'></i>Update</a>
-                    </li>
+                    </li>";
+                    }
+                  
+
+
+                    $cards .= "
                     <li class='tag__item'>
                         <a href='../reviews/courseReview.php?id={$row['course_id']}'><i class='ri-double-quotes-l me-2'></i></i>Reviews</a>
                     </li>

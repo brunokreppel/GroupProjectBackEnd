@@ -24,6 +24,11 @@ if ($result && mysqli_num_rows($result) === 1) {
 $current_courses = ""; // will hold the list for ongoing/upcoming booked courses
 $past_courses = ""; // will hold the list for past courses
 $number_of_attendees = 0; // will hold the list of attendees for a specific course
+if (isset($_SESSION["ADM"])) {
+    $current_courses = "Your are a Admin you dont have Courses";
+    $past_courses = "Your are a Admin you dont have Courses";
+}
+
 
 if (isset($_SESSION["STUDENT"])) {
     //

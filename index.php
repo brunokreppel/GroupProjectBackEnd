@@ -4,6 +4,61 @@ $loc = "";
 require_once "components/navbar.php";
 require_once 'components/db_connect.php';
 
+$sqlR = "SELECT 
+    r.id AS review_id,
+    c.id AS course_id,
+    s.id AS subject_id,
+    u.id AS user_id,
+    r.rating AS review_rating,
+    r.message AS review_message,
+    r.creation_date AS review_creation_date,
+    s.name AS subject_name,
+    u.firstName AS user_firstName,
+    u.lastName AS user_lastName
+    FROM
+    `reviews` r
+    JOIN `course` c ON r.fk_course_id = c.id
+    JOIN `subject` s ON c.fk_subject_id = s.id
+    JOIN `users` u ON r.fk_user_id = u.id LIMIT 3
+";
+$resultReviews = mysqli_query($conn, $sqlR);
+$reviewData = "";  // Initialize $reviewData as an empty string
+
+if ($resultReviews) {
+    while ($review = mysqli_fetch_assoc($resultReviews)) {
+
+        $ratingStars = "";
+        for ($i = 1; $i <= 5; $i++) {
+            $active = ($review['review_rating'] >= $i) ? ' active' : "";
+            $ratingStars .=  '<i class="fa fa-star' . $active . '"></i>';
+        }
+
+        $reviewData .= " 
+        <div class='col-xl-4 mt-4'>
+        <div class='position-relative text-center text-muted bg-body border border-dashed rounded-5 CstmContainer'>
+        <div class='reviewBorder'>
+            <div class='star-rating pb-3 pt-2'>
+            " . $ratingStars ."
+            </div>
+            <h1 class='text-body-emphasis CstmH1'>{$review['subject_name']}</h1>
+            <p class='col-lg-8 mx-auto mb-4 fst-italic reviewP'>
+                {$review['review_message']}
+            </p>
+            <div class='d-flex justify-content-center p-2'>
+                <div>
+                    <p class='card-text'>{$review['review_creation_date']}</p>
+                    <p class='card-text reviewFrom'>From: {$review['user_firstName']} {$review['user_lastName']}</p>                            
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+        ";
+    }
+} else {
+    echo "Error: " . mysqli_error($conn);
+}
+
 
 $sql = "SELECT * FROM `users` WHERE `status` = 'TUTOR'";
 $result = mysqli_query($conn, $sql);
@@ -83,6 +138,8 @@ mysqli_close($conn);
     <title>Document</title>
     <link rel="stylesheet" href="style/rootstyles.css">
     <link rel="stylesheet" href="style/index.css">
+    <link rel="stylesheet" href="style/review.css">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@300;400;700&display=swap" rel="stylesheet">
@@ -92,6 +149,18 @@ mysqli_close($conn);
     <script src="https://kit.fontawesome.com/a32278c845.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
+    <style>
+         .star-rating {
+        font-size: 1.2rem;
+        }
+        .star-rating i {
+            cursor: unset;
+            color: #ddd;
+        }
+        .star-rating i.active {
+            color: #ffcc00;
+        }
+    </style>
 
     <script>
 
@@ -130,14 +199,14 @@ mysqli_close($conn);
             </p>
 
             <p class="mb-4 fw-light">
-                Our team comprises more than 70 exceptionally skilled tutors, each thoroughly vetted through DBS checks and interviews, ensuring your peace of mind.
+                Our team comprises more than 10 exceptionally skilled tutors, each thoroughly vetted through DBS checks and interviews, ensuring your peace of mind.
             </p>
 
             <p class="mb-4 fw-light">
                 We specialize in online and in-person tuition, offering homeschooling services across all age groups and subjects. Additionally, we provide targeted GCSE revision courses for Mathematics, English, and Science.
             </p>
 
-            <a href="#" class="btn btn-primary">Learn more</a>
+            <a href="http://api.serri.codefactory.live/random/" class="btn btn-primary">Learn more</a>
 
             </div>
         </div>
@@ -209,7 +278,7 @@ mysqli_close($conn);
 
 <div class="p-5" style="        background-color: var(--primary-white);
 ">
-<h1 style="font-weight: 700;" class="display-4  mb-3 text-center">Our Calendar</h1>
+<h1 style="font-weight: 700;" class="display-4  mb-3 text-center">Our Calendar <i class="ri-calendar-event-line"></i></h1>
 
 <div class='container container-fluid formContainer' id='calendar'></div>
 
@@ -231,30 +300,19 @@ mysqli_close($conn);
 
     
 
-<div class="review_wrapper">
-<div class='container py-5'>
+<div class="review_wrapper container">
+    <h1 style="font-weight: 700; margin-left: 30px;" class="display-4 mt-2">Reviews <i class="ri-double-quotes-l"></i></h1>
+
+<div class='container py-4'>
             <div class='row align-items-md-stretch'>
-                <div class='col-md-4 mt-2'>
-                    <div class='h-100 p-4 text-bg-dark rounded-3'>
-                        <h2>Lorem</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In tempore aperiam totam minima adipisci, architecto voluptas? Necessitatibus molestiae alias nobis a unde cupiditate sit. Quod tempore pariatur facilis magni debitis.</p>
-                    </div>
-                </div>
-                <div class='col-md-4 mt-2'>
-                    <div class='h-100 p-4 text-bg-secondary rounded-3'>
-                        <h2>Lorem</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In tempore aperiam totam minima adipisci, architecto voluptas? Necessitatibus molestiae alias nobis a unde cupiditate sit. Quod tempore pariatur facilis magni debitis.</p>
-                    </div>
-                </div>
-                <div class='col-md-4 mt-2'>
-                    <div class='h-100 p-4 bg-body-tertiary border rounded-3'>
-                        <h2>Lorem</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In tempore aperiam totam minima adipisci, architecto voluptas? Necessitatibus molestiae alias nobis a unde cupiditate sit. Quod tempore pariatur facilis magni debitis.</p>
-                    </div>
-                </div>
+              
+               
+            <?php echo $reviewData ?>
+
             </div>
         </div>
 </div>
+
 
 
 
