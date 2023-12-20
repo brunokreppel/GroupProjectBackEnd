@@ -335,8 +335,8 @@ mysqli_close($conn);
                     </ul>
                     <h3>Information</h3>
                     <p class="pb-4"><i class="ri-information-line"></i> <?= $user["profile_info"] ?></p>
-                    <a href="update.php" class="btn btn-primary " style="position: absolute;
-  bottom: 15px;">Update</a>
+                    <a href="update.php" class="btn btn-primary " style="position: absolute; bottom: 15px;">Update</a>
+                    <a href="../reviews/userReview.php" class="btn btn-primary " style="position: absolute; bottom: 15px; margin-left: 5rem;">My reviews</a>
                 </div>
             </div>
         </div>

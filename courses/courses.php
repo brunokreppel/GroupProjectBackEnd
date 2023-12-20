@@ -84,6 +84,9 @@ if ($result) {
                     <li class='tag__item'>
                         <a href='../courses/updateCourse.php?id={$row['course_id']}'><i class='fas fa-edit me-2'></i>Update</a>
                     </li>
+                    <li class='tag__item'>
+                        <a href='../reviews/courseReview.php?id={$row['course_id']}'><i class='ri-double-quotes-l me-2'></i></i>Reviews</a>
+                    </li>
                 </ul>
             </div>
         </article>";
