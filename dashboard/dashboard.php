@@ -26,9 +26,9 @@ if (!isset($_SESSION["ADM"]) && !isset($_SESSION["TUTOR"])) {
     
 </head>
 <body>
-    <div class="container my-5">
-        <div class="container my-5">
-        <h1 class="headerH1">Dashboard <i class="ri-dashboard-line iconH1"></i></h1>
+
+    <div class="container mb-5 mt-4">
+        <h1 class="headerH1 pb-5">Dashboard <i class="ri-dashboard-line iconH1"></i></h1>
         <div class="row d-flex justify-content-center">
             <?php if (isset($_SESSION["TUTOR"])): ?>
                 <div class="col-xl-8 mt-4">
@@ -84,6 +84,7 @@ if (!isset($_SESSION["ADM"]) && !isset($_SESSION["TUTOR"])) {
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     </div>

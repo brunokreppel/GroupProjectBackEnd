@@ -112,8 +112,8 @@ mysqli_close($conn);
 <body>
  
 
-    <div class="container mb-5">
-        <h1 class="headerH1">Course reviews <i class="ri-double-quotes-l"></i></h1>
+    <div class="container mb-5 mt-4">
+        <h1 class="headerH1 pb-5">Course reviews <i class="ri-double-quotes-l"></i></h1>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             
                 <?= $cards ?>
