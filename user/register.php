@@ -93,12 +93,13 @@
         }
 
         // simple validation for the phone number
+        // $phone_number = filter_var($phone_number, FILTER_SANITIZE_NUMBER_INT);
 
         if(empty($phone_number)){
             $error = true;
             $phone_numberError = "Phone number cannot be empty.";
         }
-
+        
         // do the picture last
         if($error === false){
             $picture = fileUpload($_FILES["picture"]);
@@ -118,6 +119,7 @@
                 <div class='alert alert-success' role='alert'>
                     <p>New user created! $picture[1]</p>
                 </div>";
+                header("refresh: 3; url= login.php");
             }
             else{
                 echo "

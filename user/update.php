@@ -110,6 +110,7 @@
         }
 
         // simple validation for the phone number
+        // $phone_number = filter_var($phone_number, FILTER_SANITIZE_NUMBER_INT);
 
         if(empty($phone_number)){
             $error = true;
