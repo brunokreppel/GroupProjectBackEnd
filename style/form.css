@@ -16,11 +16,9 @@
     font-weight: 700;
 }
 
-
 .text-center {
     text-align: center;
 }
-
 
 .btn-primary {
     background-color: var(--primary-blue) !important;
@@ -38,18 +36,29 @@
     background-color: #187be4 !important;
 }
 
-.container a {
+.formContainer a {
     color: #007bff;
     text-decoration: none;
 }
 
-.container a:hover {
+.formContainer a:hover {
     text-decoration: underline;
 }
 
 textarea {
     width: 100%;
     padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    resize: vertical; 
+}
+
+.textU{
+    width: 100%;
+    padding: 8px;
+    height: 200px;
     margin-bottom: 10px;
     box-sizing: border-box;
     border: 1px solid #ced4da;

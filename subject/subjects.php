@@ -13,25 +13,35 @@ $subjects = "";
 if ($result) {
     while ($row = mysqli_fetch_assoc($result)) {
         $subjects .= " 
-        <div class='card my-4'>
-            <p class='card-header'>Subject ID: {$row['id']}</p>
-            <div class='card-body'>
-                <h5 class='card-title'>{$row['name']}</h5>
-                <p class='card-text'>Description</p>
-                <p class='card-text fst-italic'>{$row['description']}</p>
+
+        <div class='mt-4'>
+            <div class='position-relative text-center text-muted bg-body border border-dashed rounded-5 CstmContainer'>
+            <div class='reviewBorder'>
+                <h1 class='text-body-emphasis CstmH1'>{$row['name']}</h1>
+                <p class='col-lg-8 mx-auto mb-4 desc'>
+                    Description:
+                    <p class='fst-italic'>{$row['description']}</p>
+                </p>
                 <details class='pt-2 pb-4'>
-                    <summary>Details</summary>
-                        <p class='pt-2'>Core concepts</p>
+                    <summary class='desc'>Details</summary>
+                        <p class='pt-2 desc'>Core concepts</p>
                         <p class='card-text fst-italic'>{$row['core_concepts']}</p>
-                        <p>Exam preparation</p>
+                        <p class='desc'>Exam preparation</p>
                         <p class='card-text fst-italic'>{$row['exam_preparation']}</p>
-                        <p>Importance</p>
+                        <p class='desc'>Importance</p>
                         <p class='card-text fst-italic'>{$row['importance']}</p>
                 </details>
-                <a href='updateSubject.php?id={$row['id']}' class='btn-link text-decoration-none text-reset'><button type='button' class='btn btn-outline-warning mx-2'>Update</button></a>
-                <a href='deleteSubject.php?id={$row['id']}' class='btn-link text-decoration-none text-reset'><button type='button' class='btn btn-outline-danger mx-2'>Delete</button></a>
+                <div class='d-flex justify-content-center'>
+                        <div class='mb-5'>
+                            <a href='updateSubject.php?id={$row['id']}' class='UpdateS mb-4 mx-2'>Update</a>
+                            <a href='deleteSubject.php?id={$row['id']}' class='DeleteS  mb-4 mx-2'>Delete</a>
+                        </div>
+                </div>
             </div>
-        </div> ";
+            </div>
+        </div>
+        
+        ";
     }
 } else {
 
@@ -49,32 +59,29 @@ mysqli_close($conn);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Subjects</title>
-    <link rel="stylesheet" href="style/rootstyles.css">
-    <link rel="stylesheet" href="style/index.css">
+    <link rel="stylesheet" href="../style/rootstyles.css">
+    <link rel="stylesheet" href="../style/sub_uni.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" crossorigin="">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a32278c845.js" crossorigin="anonymous"></script>
+
 
    
 </head>
 
 <body>
  
-    <section class="py-5 text-center container">
-        <div class="row py-lg-5">
-            <div class="col-lg-6 col-md-8 mx-auto">
-                <h1 class="fw-light">Subjects</h1>
-            </div>
-        </div>
-    </section>
 
-    <div class="album py-5 bg-body-tertiary">
-        <div class="container">
-            <div class="my-3">
-                <?= $subjects ?>
-            </div>
+    <div class="container mb-5 mt-4">
+        <h1 class="headerH1 pb-5">Subjects <i class="ri-book-open-line"></i></h1>
+        <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 rox-cols-lg-2 g-3">
+            
+            <?= $subjects ?>    
+            
         </div>
     </div>
-
 
 
     <?php require_once '../components/footer.php' ?>

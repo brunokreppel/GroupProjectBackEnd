@@ -58,14 +58,14 @@ echo "
 
                 <div class='mt-4'>
                     <!-- Facebook -->
-                    <a type='button' class='btn btn-floating btn-light btn-lg'><i class='ri-facebook-fill'></i></a>
+                    <a type='button' class='btn btn-floating btn-light btn-lg' href='https://www.facebook.com/'><i class='ri-facebook-fill'></i></a>
                     <!-- Linkedin -->
-                    <a type='button' class='btn btn-floating btn-light btn-lg'><i class='ri-linkedin-fill'></i
+                    <a type='button' class='btn btn-floating btn-light btn-lg' href='https://www.linkedin.com/'><i class='ri-linkedin-fill'></i
                     ></i></a>
                     <!-- Twitter -->
-                    <a type='button' class='btn btn-floating btn-light btn-lg'><i class='ri-twitter-x-line'></i></a>
+                    <a type='button' class='btn btn-floating btn-light btn-lg' href='https://twitter.com/?lang=en'><i class='ri-twitter-x-line'></i></a>
                     <!-- Google + -->
-                    <a type='button' class='btn btn-floating btn-light btn-lg'><i class='ri-google-fill'></i></a>
+                    <a type='button' class='btn btn-floating btn-light btn-lg' href='https://www.google.com/account/about/'><i class='ri-google-fill'></i></a>
                 </div>
             </div>
             <!--Grid column-->

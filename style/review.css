@@ -101,13 +101,13 @@ p {
 }
 
 .UpdateR:hover{
-    /* color: #AD9551; */
+    color: #AD9551;
     border-bottom: 2px solid #AD9551;
     padding-bottom: 10px;
 }
 
 .DeleteR:hover{
-    /* color: var(--accent-color); */
+    color: darkred;
     border-bottom: 2px solid var(--accent-color);
     padding-bottom: 10px;
 }

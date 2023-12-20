@@ -63,7 +63,7 @@ if ($result) {
                             <a href='updateReview.php?id={$row['review_id']}' class='UpdateR mb-4 mx-2'>Update</a>
                             <a href='deleteReview.php?id={$row['review_id']}' class='DeleteR  mb-4 mx-2'>Delete</a>
                         </div>
-                    </div>
+                </div>
             </div>
             </div>
         </div>
