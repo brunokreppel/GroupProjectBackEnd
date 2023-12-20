@@ -40,7 +40,7 @@ if ($result) {
         <div class='col-xl-4 mt-4'>
             <div class='position-relative text-center text-muted bg-body border border-dashed rounded-5 CstmContainer'>
             <div class='reviewBorder'>
-                <div class='star-rating py-2'>
+                <div class='star-rating pb-3 pt-2'>
                 " . $ratingStars ."
                 </div>
                 <h1 class='text-body-emphasis CstmH1'>{$row['subject_name']}</h1>
@@ -85,7 +85,7 @@ mysqli_close($conn);
 
     <style>
         .star-rating {
-        font-size: 1rem;
+        font-size: 1.2rem;
         }
         .star-rating i {
             cursor: unset;

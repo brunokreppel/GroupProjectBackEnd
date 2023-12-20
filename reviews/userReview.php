@@ -45,7 +45,7 @@ if ($result) {
         <div class='col-xl-4 mt-4'>
             <div class='position-relative text-center text-muted bg-body border border-dashed rounded-5 CstmContainerU'>
             <div class='reviewBorder'>
-                <div class='star-rating py-2'>
+                <div class='star-rating pt-2 pb-3'>
                 " . $ratingStars ."
                 </div>
                 <h1 class='text-body-emphasis CstmH1'>{$row['subject_name']}</h1>
@@ -94,6 +94,20 @@ mysqli_close($conn);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@300;400;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a32278c845.js" crossorigin="anonymous"></script>
+
+    <style>
+        .star-rating {
+        font-size: 1.2rem;
+        }
+        .star-rating i {
+            cursor: unset;
+            color: #ddd;
+        }
+        .star-rating i.active {
+            color: #ffcc00;
+        }
+    </style>
+
 </head>
 
 <body>
