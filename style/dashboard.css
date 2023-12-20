@@ -1,5 +1,4 @@
 
-*{font-family: 'Bai Jamjuree', sans-serif;}
 
 .CstmContainer{
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
@@ -12,6 +11,7 @@
     font-size: 2.6rem !important;
     font-weight: 700;
     margin: 0 0 5px 0 !important;
+    
     
 }
 .iconH1{
@@ -52,8 +52,10 @@ p {
     background-color: var(--primary-blue) !important;
     border: var(--primary-blue) !important;
 }
-.btn-primary:hover {
-    background-color: #187be4 !important;
+.btn-primary:hover{
+   background-color: #187be4 !important;
 }
-
+.border{
+    border: 4px solid var(--primary-blue) !important;
+}
 

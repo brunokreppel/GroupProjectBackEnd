@@ -179,50 +179,80 @@ if (mysqli_num_rows($result) == 0) {
     die();
 }
 
-
+$book = "";
 $cards = "";
 if ($result) {
     while ($row = mysqli_fetch_assoc($result)) {
         // Container for Course Information
-        $cards .= "
-        <div class='container py-4'>
-            <header class='pb-3 mb-4 border-bottom'>
-                <a href='/' class='d-flex align-items-center text-body-emphasis text-decoration-none'>
-                    <span class='fs-4'>Jumbotron example</span>
-                </a>
-            </header>
-
-            <div class='p-5 mb-4 bg-body-tertiary rounded-3'>
-                <div class='container-fluid py-5'>
-                    <h1 class='display-5 fw-bold'>{$row['subject_name']}</h1>
-                    <p class='col-md-8 fs-4'>{$row['subject_description']}</p>
-                </div>
-            </div>
-
-            <div class='row align-items-md-stretch'>
-                <div class='col-md-6'>
-                    <div class='h-100 p-5 text-bg-dark rounded-3'>
-                        <h2>{$row['university_name']}</h2>
-                        <p>{$row['university_description']}</p>
-                        <button class='btn btn-outline-light' type='button'>Example button</button>
-                    </div>
-                </div>
-                <div class='col-md-6'>
-                    <div class='h-100 p-5 bg-body-tertiary border rounded-3'>
-                        <h2>{$row['tutor_firstName']} {$row['tutor_lastName']}</h2>
-                        <p>{$row['tutor_profile_info']}</p>
-                        <button class='btn btn-outline-secondary' type='button'>Example button</button>
-                    </div>
-                </div>
-            </div>";
         if (isset($_SESSION["STUDENT"]) && check_booking($_SESSION["STUDENT"],$row['fromDate'],$row['ToDate'])) {
-            $cards .= "<form method='post'>
-                <input type='submit' value='Book this course' name='BookCourse' class='btn btn-primary'>
+            $book .= "<form method='post'>
+                <input type='submit' value='Book this course' name='BookCourse' class='btn btn-primary w-100'>
                 <span class='text-danger'><?= $bcError ?></span>
             </form>";
             }
         $cards .= "</div>
         ";
+
+        $cards .= "
+        <div class='container py-4'>
+            <header class='pb-3 mb-4 border-bottom'>
+                <h2 href='/' class='d-flex align-items-center text-body-emphasis text-decoration-none'>
+                    <span class='fs-2 fw-bold'>Course Details <i class='ri-book-read-line'></i></span>
+                </h2>
+            </header>
+
+            <div class='px-5 pb-3 pt-4 mb-4 bg-body-tertiary rounded-3'>
+            <div class='container-fluid py-4 border-end border-2' style='max-width: 950px; margin-left: 10px; padding-left: 0;'>
+                <h1 class='display-5 fw-bold pb-3'>{$row['subject_name']}</h1>
+                <p class='col-md-10 fs-6'>{$row['subject_description']}</p>
+                <p class='col-md-10 fs-6'>{$row['subject_core_concepts']}</p>
+                <p class='col-md-10 fs-6'>{$row['subject_exam_preparation']}</p>
+                <p class='col-md-10 fs-6'>{$row['subject_importance']}</p>
+            </div>
+        </div>
+        
+
+            <div class='row align-items-md-stretch'>
+                <div class='col-md-6'>
+                    <div class='h-100 p-5 text-bg-dark rounded-3'>
+                        <h2 class='fw-bold pb-3'>{$row['university_name']}</h2>
+                        <p>{$row['university_description']}</p>
+                        <p>{$row['university_location']}</p>
+                        <a href='{$row['university_extURL']}'>University Link</a>
+                    </div>
+                </div>
+                <div class='col-md-6'>
+                    <div class='h-100 p-5 bg-body-tertiary border rounded-3'>
+                        <h2 class='fw-bold pb-3'>Tutor:</h2>
+                        <p class='fw-bold'><i class='ri-user-line'></i> {$row['tutor_firstName']} {$row['tutor_lastName']}</p>
+                        <p><span class='fw-bold'><i class='ri-mail-line'></i> Email:</span> {$row['tutor_email']}</p>
+                        <p ><span class='fw-bold'><i class='ri-phone-line'></i> Phone:</span> {$row['tutor_phone_number']}</p>
+                        <p><span class='fw-bold'><i class='ri-information-line'></i> Info: </span>{$row['tutor_profile_info']}</p>
+                        <h2 class='fw-bold pb-3'>Course Details:</h2>
+                        <p></p>
+                        
+                        <!-- Course Dates -->
+                        <div class='pb-2'>
+                        <time datetime='{$row['fromDate']}'>
+                        <i class='fas fa-calendar-alt me-2'></i><span class='fw-bold'>From:</span> " . date('F j, Y', strtotime($row['fromDate'])) . "
+                    </time>
+                        </div>
+                    
+                        
+                        <div class='pb-2'>
+                        <time datetime='{$row['ToDate']}'>
+                        <i class='fas fa-calendar-alt me-2'></i><span class='fw-bold'>To:</span> " . date('F j, Y', strtotime($row['ToDate'])) . "
+                    </time>
+                        </div >
+                     
+                        
+                        <div class='fw-bold mb-3'><i class='ri-currency-line'></i> Price:  <span class='fw-light '> {$row['price']}$</span></div>
+                       <div> $book </div>
+                    </div>
+                </div>
+            </div>";
+
+   
     }
 } else {
     echo "Error: " . mysqli_error($conn);
@@ -237,17 +267,24 @@ if ($result) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style/rootstyles.css">
-    <link rel="stylesheet" href="style/index.css">
+    <link rel="stylesheet" href="../style/rootstyles.css">
+    <link rel="stylesheet" href="../style/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@300;400;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" crossorigin="">
     <script src="https://kit.fontawesome.com/a32278c845.js" crossorigin="anonymous"></script>
+    
+<style>
 
+   
+</style>
 </head>
 <body>
     
 
-
+    
 
     <?php echo $cards ?>
 
