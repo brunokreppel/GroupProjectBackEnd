@@ -122,22 +122,44 @@ if (isset($_SESSION["ADM"]) || isset($_SESSION["TUTOR"])) {
         }
 
         // Check if a new image is provided for update
-        $newImage = fileUpload($_FILES["image"], "courses");
-        if (!empty($newImage[0])) {
-            // If a new image is uploaded, update the image path
-            $image = $newImage[0];
-        }
+        if ($error === false) {
+            $newImage = fileUpload($_FILES["image"], "courses");
+            }
+                // if (!empty($newImage[0])) {
+                //     // If a new image is uploaded, update the image path
+                //     $image = $newImage[0];
+                // }
 
         if ($error === false) {
-            $sql = "UPDATE course SET 
-                    fk_subject_id = $subjectId,
-                    fk_university_id = $universityId,
-                    fk_tutor_id = $tutorId,
-                    fromDate = '$fromDate',
-                    ToDate = '$toDate',
-                    price = $price,
-                    `image` = '$image'
-                    WHERE id = $id";
+            if($_FILES["image"]["error"] == 0){
+
+
+                if ($row["image"] !== "Course.png") {
+                    unlink("../assets/$row[image]");
+
+                }
+
+                $sql = "UPDATE course SET 
+                        fk_subject_id = $subjectId,
+                        fk_university_id = $universityId,
+                        fk_tutor_id = $tutorId,
+                        fromDate = '$fromDate',
+                        ToDate = '$toDate',
+                        price = $price,
+                        `image` = '$newImage[0]'
+                        WHERE id = $id";
+            } else {
+
+                $sql = "UPDATE course SET 
+                        fk_subject_id = $subjectId,
+                        fk_university_id = $universityId,
+                        fk_tutor_id = $tutorId,
+                        fromDate = '$fromDate',
+                        ToDate = '$toDate',
+                        price = $price
+                        WHERE id = $id";
+
+            }
 
             if (mysqli_query($conn, $sql)) {
                 $recordMessage = "Record has been updated successfully";

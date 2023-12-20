@@ -125,8 +125,7 @@
             $password = password_hash ($password, PASSWORD_DEFAULT);
             //$password = hash("sha256", $password);
 
-
-                if ($row["image"] !== $picture[0]){
+                if($_FILES["picture"]["error"] == 0){
 
 
                     if ($row["image"] !== "User-avatar.svg.png") {

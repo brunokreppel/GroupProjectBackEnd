@@ -29,9 +29,9 @@
             } else {
                 $imageName = uniqid("") . "." . $fileExtension; 
                 $destination = "../assets/{$imageName}";
-                if ($source == "courses") {
-                    $destination = "../assets/{$imageName}";
-                }
+                // if ($source == "courses") {
+                //     $destination = "../assets/{$imageName}";
+                // }
                 move_uploaded_file($image["tmp_name"], $destination); 
                 $message = "Ok"; // Validation succeeded
             }
