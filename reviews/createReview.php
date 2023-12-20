@@ -62,16 +62,16 @@ if (isset($_SESSION["STUDENT"])) {
     <title>Create Review</title>
     <link rel="stylesheet" href="../style/rootstyles.css">
     <link rel="stylesheet" href="../style/review.css">
-    <link rel="stylesheet" href="../style/form.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" crossorigin="">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@300;400;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a32278c845.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
-<div class="container">
+<div class="container formContainer" style="max-width: 600px !important">
 
      <!-- Display record creation message -->
      <?php if (!empty($recordMessage)) : ?>
@@ -79,16 +79,9 @@ if (isset($_SESSION["STUDENT"])) {
             <?php echo $recordMessage; ?>
         </div>
     <?php endif; ?>
-
-    <section class="py-5 text-center container">
-        <div class="row py-lg-5">
-            <div class="col-lg-6 col-md-8 mx-auto">
-            <h3 class="text-center">Review</h3>
-            </div>
-        </div>
-    </section>
     
-    <form method="POST">
+    <form method="POST" class="px-1" name="createForm">
+    <h2 class="fw-bold text-center mb-3">Create Review</h2>
 
         <div class="form-group">
             <label for="rating" class="form-label">Rating:</label>
@@ -106,12 +99,14 @@ if (isset($_SESSION["STUDENT"])) {
         <div class="form-group">
             <label for="message" class="form-label">Your message:</label>
             <textarea type="text" name="message" class="form-control" cols="100" rows="5" required></textarea>
-            <?= $messageError ?>
+            <div class="text-danger mb-2">
+                <?= $messageError ?>
+            </div>
         </div>
         
-        <div class="form-group">
+        <div class="form-group mb-2">
             <label for="course_id">Select a Course:</label>
-            <select name="course_id" class="form-select" required>
+            <select name="course_id" class="form-select mt-2" required>
                 <?php
 
                 if (!$conn) {
@@ -161,9 +156,9 @@ if (isset($_SESSION["STUDENT"])) {
                 $row = mysqli_fetch_assoc($result);
 
                 // Display the details of the logged-in student
-                echo '<div class="form-group">';
+                echo '<div class="form-group mb-2">';
                 echo '<label for="user_id" class="form-label">Student:</label>';
-                echo '<input name="user_id" class="form-select" value="' . $row["firstName"] . ' ' . $row["lastName"] . '">';
+                echo '<input name="user_id" class="form-control" value="' . $row["firstName"] . ' ' . $row["lastName"] . '">';
                 echo '</div>';
             } else {
                 echo '<input value="" disabled>No student found</input>';
@@ -176,7 +171,7 @@ if (isset($_SESSION["STUDENT"])) {
         mysqli_close($conn);
         ?>
         
-        <button name="create" type="submit" class="btn btn-primary updateReview">Create a review</button>
+        <button name="create" type="submit" class="btn btn-primary updateReview">Create</button>
     </form>
 
 </div>

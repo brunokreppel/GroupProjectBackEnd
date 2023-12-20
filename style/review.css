@@ -1,5 +1,8 @@
-*{
+a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video {
     font-family: 'Bai Jamjuree', sans-serif;
+}
+.fa{
+    font-family: var(--fa-style-family,"Font Awesome 6 Free")!important;
 }
 
 .form-group {
@@ -32,22 +35,124 @@
     color: #ffcc00;
 }
 
-.cardReview{
-    height: 450px!important;
+.CstmContainer{
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    background-color: var(--primary-white);
+    padding: 30px;
+    height: 500px;
 }
 
-.headerReview{
-    background-color: #002147!important;
+.CstmContainerU{
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    background-color: var(--primary-white);
+    padding: 30px;
+    height: 580px;
 }
 
-.reviewBody{
-    background-image: linear-gradient(rgba(0,33,71,0.1), rgba(0,33,71,0.5))!important;
+.reviewP{
+    height: 220px;
 }
 
-.reviewBody h5{
-    color: #800e13!important;
+.headerH1{
+    text-align: center;
+    font-size: 2.6rem !important;
+    font-weight: 700;
+    margin: 30px 0 30px 0 !important;
+    color: black;
+    
 }
 
-.updateReview{
-    width: 200px!important;
+.CstmH1 {
+    text-align: center;
+    border-bottom: 3px solid black;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    margin-top: 0px !important;
+}
+
+.ri-double-quotes-l {
+    font-size: 2.6rem;
+}
+
+.text-body-emphasis {
+    font-size: 1.5rem; 
+    font-weight: bold;
+    margin-top: 1rem; 
+}
+
+p {
+    font-size: 1rem; 
+    margin-bottom: 1rem;
+}
+
+.reviewFrom{
+    font-weight: bold;
+    padding-bottom: 10px;
+    color: black;
+}
+
+.reviewBorder{
+    border-bottom: 3px solid black;
+}
+
+.UpdateR, .DeleteR{
+    text-decoration: none;
+    color: var(--primary-blue);
+}
+
+.UpdateR:hover{
+    /* color: #AD9551; */
+    border-bottom: 2px solid #AD9551;
+    padding-bottom: 10px;
+}
+
+.DeleteR:hover{
+    /* color: var(--accent-color); */
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 10px;
+}
+
+.formContainer {
+    width: 400px;
+    margin: auto;
+    margin-top: 50px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    background-color: var(--primary-white);
+}
+
+.form-control {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--primary-blue) !important;
+    border: var(--primary-blue) !important;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+
+}
+
+.btn-primary:hover {
+    background-color: #187be4 !important;
+}
+
+textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    resize: vertical; 
 }
