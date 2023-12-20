@@ -4,6 +4,10 @@
 echo "
 
 <style>
+body{
+    background-color: #FEFEFE !important;
+}
+
 .test{
     margin-left: 100px;
 }

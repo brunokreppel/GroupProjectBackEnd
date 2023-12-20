@@ -31,13 +31,20 @@ if ($result) {
                     <summary class='desc'>Details</summary>
                         <p class='pt-2 desc'>Description</p>
                         <p class='card-text fst-italic'>{$row['uni_description']}</p>
-                </details>
-                <div class='d-flex justify-content-center'>
+                </details>";
+
+        // Check if the user is a TUTOR or ADM to display additional options
+        if (isset($_SESSION["TUTOR"]) || isset($_SESSION["ADM"])) {
+            $universities .= "
+                    <div class='d-flex justify-content-center'>
                         <div class='mb-5'>
                             <a href='updateUniversity.php?id={$row['id']}' class='UpdateU mb-4 mx-2'>Update</a>
                             <a href='deleteUniversity.php?id={$row['id']}' class='DeleteU  mb-4 mx-2'>Delete</a>
                         </div>
-                </div>
+                    </div>";
+        }
+
+        $universities .= "
             </div>
             </div>
         </div>
@@ -45,7 +52,7 @@ if ($result) {
         ";
     }
 } else {
-
+    // Handle the case where the query fails
     echo "Error: " . mysqli_error($conn);
 }
 
