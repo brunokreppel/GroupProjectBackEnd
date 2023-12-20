@@ -114,14 +114,21 @@ if (isset($_SESSION["STUDENT"])) {
                 }
 
                 // SQL query to retrieve subject names associated with courses
-                $sql = "SELECT c.id AS course_id, s.id AS subject_id, c.*, s.* FROM `course` c JOIN `subject` s ON c.fk_subject_id = s.id";
+                $sql = "SELECT b.id AS booking_id, c.id AS course_id, s.id AS subject_id, u.id AS user_id, s.name AS subject_name
+                FROM `booking` b 
+                JOIN `course` c ON b.fk_course_id = c.id
+                JOIN `subject` s ON c.fk_subject_id = s.id
+                JOIN `users` u ON b.user_id = u.id 
+                WHERE u.id = $loggedInStudentId
+
+                ";
                 $result = mysqli_query($conn, $sql);
                 $options = "";
                 if ($result) {
                     if (mysqli_num_rows($result) > 0) {
                         while ($row = mysqli_fetch_assoc($result)) {
                             $subjectId = $row['course_id'];
-                            $subjectName = $row['name'];
+                            $subjectName = $row['subject_name'];
                             $options .= "<option value='$subjectId'>$subjectName</option>";
                         }
                         echo $options;
