@@ -6,6 +6,11 @@ $loc = "../";
 require_once '../components/db_Connect.php';
 require_once "../components/navbar.php";
 
+if(!isset($_SESSION["STUDENT"])){
+    header("Location: ../user/userProfile.php");
+    die();
+}
+
 $loggedInStudentId = $_SESSION["STUDENT"];
 
 $sql = "SELECT 
