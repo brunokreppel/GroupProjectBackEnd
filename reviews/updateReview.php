@@ -154,7 +154,8 @@ if (isset($_SESSION["STUDENT"])) {
         </div>
 
         
-        <button name="update" type="submit" class="btn btn-primary mt-3">Update review</button>
+        <button name="update" type="submit" class="btn btn-primary mt-3">Update</button>
+        <a href='userReview.php' class='btn-link text-decoration-none text-reset'><button type='button' class='btn btn-primary mt-3'>Back <i class="ri-arrow-go-back-fill"></i></button></a>
     </form>
 
 </div>
