@@ -80,10 +80,15 @@ if (isset($_SESSION["ADM"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create University</title>
-    <link rel="stylesheet" href="style/rootstyles.css">
-    <link rel="stylesheet" href="style/index.css">
+    <link rel="stylesheet" href="../style/rootstyles.css">
+    <link rel="stylesheet" href="../style/index.css">
+    <link rel="stylesheet" href="../style/form.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@300;400;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" crossorigin="">
+
     <style>
         .form-group {
             margin-bottom: 1rem;
@@ -95,22 +100,19 @@ if (isset($_SESSION["ADM"])) {
         }
 
         .form-control {
-            width: 100%;
+          
             padding: 0.375rem 0.75rem;
             font-size: 1rem;
             line-height: 1.5;
             border-radius: 0.25rem;
             border: 1px solid #ced4da;
         }
-
-        textarea{
-            height: 20dvh;
-        }
+      
     </style>
 </head>
 <body>
 
-<div class="container">
+<div class="container formContainer" style="max-width: 700px;">
 
      <!-- Display record creation message -->
      <?php if (!empty($recordMessage)) : ?>
@@ -119,7 +121,7 @@ if (isset($_SESSION["ADM"])) {
         </div>
     <?php endif; ?>
 
-    <h3 class="text-center">University</h3>
+    <h2 class="fw-bold text-center mb-2">Create University</h2>
     <form method="POST">
 
         <div class="form-group">
@@ -146,7 +148,7 @@ if (isset($_SESSION["ADM"])) {
             <span class="text-danger"><?= $uni_descriptionError ?></span>
         </div>
         
-        <button name="create" type="submit" class="btn btn-primary">Add a university</button>
+        <button name="create" type="submit" class="btn btn-primary">Create</button>
     </form>
 
 </div>

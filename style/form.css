@@ -12,6 +12,9 @@
     margin-bottom: 15px;
     width: 100%;
 }
+.form-label{
+    font-weight: 700;
+}
 
 
 .text-center {

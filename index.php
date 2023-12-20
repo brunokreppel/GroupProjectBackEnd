@@ -112,7 +112,9 @@ mysqli_close($conn);
     </script>
     
 
-
+    <style>
+  
+    </style>
     
 </head>
 <body>
@@ -121,7 +123,7 @@ mysqli_close($conn);
         <div class="about_container">
         <p class="mb-4">
             <div class="text">
-            <h1 style="font-weight: 700;">About Us</h1>
+            <h1 style="font-weight: 700;" class="display-4">About Us</h1>
             <br>
             <p class="fw-light">
                 Established in 2021, Tutore Sphere is dedicated to providing a top-tier education at an affordable rate for all families.
@@ -135,24 +137,24 @@ mysqli_close($conn);
                 We specialize in online and in-person tuition, offering homeschooling services across all age groups and subjects. Additionally, we provide targeted GCSE revision courses for Mathematics, English, and Science.
             </p>
 
-            <a href="#" class="btn btn-warning">Learn more</a>
+            <a href="#" class="btn btn-primary">Learn more</a>
 
             </div>
         </div>
-        <div class="about_container" class="laptop">
-            <img src="assets/laptop.svg" alt="">
+        <div class="about_container" >
+            <img src="assets/laptop.svg" alt="" class="laptop">
         </div>
     </div>
 
     <div class="services_wrapper">
     <div class="container px-4 " id="featured-3">
-    <h1 style="font-weight: 700;" class="border-bottom">Features</h1>
+    <h1 class="border-bottom display-4 pb-3 fw-bold">Features</h1>
     <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
       <div class="feature col">
         <div class="d-inline-flex align-items-center justify-content-center fs-2 mb-3">
         <i class="ri-book-read-line dashboard-icon"></i>
         </div>
-        <h3 class="fs-2 text-body-emphasis">Courses</h3>
+        <h3 class="fs-2 text-body-emphasis fw-bold pb-2">Courses</h3>
         <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
         <a href="courses/courses.php" class="icon-link text-decoration-none">
         <span class="text-decoration-underline">View</span>
@@ -163,7 +165,7 @@ mysqli_close($conn);
       <div class="d-inline-flex align-items-center justify-content-center fs-2 mb-3">
         <i class="ri-building-line dashboard-icon"></i>
         </div>
-        <h3 class="fs-2 text-body-emphasis">Universities</h3>
+        <h3 class="fs-2 text-body-emphasis fw-bold pb-2">Universities</h3>
         <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
         <a href="university/universities.php" class="icon-link text-decoration-none">
         <span class="text-decoration-underline">View</span>
@@ -174,7 +176,7 @@ mysqli_close($conn);
       <div class="d-inline-flex align-items-center justify-content-center fs-2 mb-3">
       <i class="ri-question-answer-line"></i>        
         </div>
-        <h3 class="fs-2 text-body-emphasis">Reviews</h3>
+        <h3 class="fs-2 text-body-emphasis fw-bold pb-2">Reviews</h3>
         <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
         <a href="reviews/reviews.php" class="icon-link text-decoration-none">
         <span class="text-decoration-underline">View</span>
@@ -204,7 +206,15 @@ mysqli_close($conn);
 
 </div>
 
-<div class='container w-75 h-75' id='calendar'></div>
+
+<div class="p-5" style="        background-color: var(--primary-white);
+">
+<h1 style="font-weight: 700;" class="display-4  mb-3 text-center">Our Calendar</h1>
+
+<div class='container container-fluid formContainer' id='calendar'></div>
+
+</div>
+
 
  <!-- Swiper -->
  <div class="swiper mySwiper">
