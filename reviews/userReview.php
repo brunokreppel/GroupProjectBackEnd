@@ -36,7 +36,14 @@ $sql = "SELECT
 $result = mysqli_query($conn, $sql);
 $cards = "";
 
+if(mysqli_num_rows($result) == 0){
+
+    $cards = "No reviews yet...";
+}
+
+
 if ($result) {
+
     while ($row = mysqli_fetch_assoc($result)) {
 
         $ratingStars = "";
@@ -117,9 +124,9 @@ mysqli_close($conn);
 
 <body>
 
-    <div class="container mb-5 mt-4">
+    <div class="container mb-5 mt-4" style='min-height: 83dvh;'>
         <h1 class="headerH1 pb-5">My reviews <i class="ri-double-quotes-l"></i></h1>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 d-flex justify-content-center">
             
                 <?= $cards ?>
             
