@@ -53,6 +53,10 @@ p {
     color: black;
 }
 
+details{
+    text-align: left;
+}
+
 summary:hover{
     background-color: var(--primary-blue);
     color: var(--primary-white);
