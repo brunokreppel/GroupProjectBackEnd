@@ -103,7 +103,6 @@ mysqli_close($conn);
 <div class="container mb-5 mt-4" style='min-height: 83dvh;'>
         <h1 class="headerH1 pb-5">Reviews <i class="ri-double-quotes-l"></i></h1>
         <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-xl-2 g-3">
-
             
                 <?= $cards ?>
             
