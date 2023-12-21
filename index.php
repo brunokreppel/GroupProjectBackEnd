@@ -41,8 +41,8 @@ if ($resultReviews) {
             " . $ratingStars ."
             </div>
             <h1 class='text-body-emphasis CstmH1'>{$review['subject_name']}</h1>
-            <p class='col-lg-8 mx-auto mb-4 fst-italic reviewP'>
-                {$review['review_message']}
+            <p class='col-lg-10 mx-auto mb-4 fst-italic reviewP overflow-scroll px-2'>
+            {$review['review_message']}
             </p>
             <div class='d-flex justify-content-center p-2'>
                 <div>
@@ -189,7 +189,7 @@ mysqli_close($conn);
 <body>
 
     <div class="about_wrapper">
-        <div class="about_container">
+        <div class="about_container" style="margin-top: -100px;">
         <p class="mb-4">
             <div class="text">
             <h1 style="font-weight: 700;" class="display-4">About Us</h1>
@@ -211,7 +211,7 @@ mysqli_close($conn);
             </div>
         </div>
         <div class="about_container" >
-            <img src="assets/laptop.svg" alt="" class="laptop">
+            <img src="assets/laptop.svg" alt="" class="laptop" style="margin-top: -40px;" >
         </div>
     </div>
 

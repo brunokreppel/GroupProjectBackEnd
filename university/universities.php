@@ -39,7 +39,7 @@ if ($result) {
                 </details>";
 
         // Check if the user is a TUTOR or ADM to display additional options
-        if (isset($_SESSION["TUTOR"]) || isset($_SESSION["ADM"])) {
+        if (isset($_SESSION["ADM"])) {
             $universities .= "
                     <div class='d-flex justify-content-center'>
                         <div class='mb-5'>

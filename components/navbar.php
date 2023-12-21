@@ -20,7 +20,7 @@ echo "
     }
 </style>
 
-<nav class='navbar navbar-expand-lg navbar-light' style='background-color: #fefefe;         box-shadow: 0 0.1px 5px rgba(0, 0, 0, 0.2);'>
+<nav class='navbar navbar-expand-lg navbar-light' style='background-color: #fefefe;         box-shadow: 0 0.1px 5px rgba(0, 0, 0, 0.2); padding: 2px;'>
     <div class='container-fluid'>
         <a class='navbar-brand' href='{$loc}index.php'><img src='{$loc}assets/output-onlinepngtools(2).png' alt='' width='130px' style='margin-right: -15px;'></a>
         <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarNav'
