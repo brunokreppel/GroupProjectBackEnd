@@ -92,10 +92,10 @@ if ($result) {
                 <div class='postcard__subtitle small'>
                     <!-- Course Dates -->
                     <time datetime='{$row['fromDate']}'>
-                        <i class='fas fa-calendar-alt mr-2'></i>From: " . date('F j, Y', strtotime($row['fromDate'])) . "
+                        <i class='fas fa-calendar-alt me-2'></i>From: " . date('F j, Y', strtotime($row['fromDate'])) . "
                     </time>
                     <time datetime='{$row['ToDate']}'>
-                        <i class='fas fa-calendar-alt mr-2'></i>To: " . date('F j, Y', strtotime($row['ToDate'])) . "
+                        <i class='fas fa-calendar-alt me-2'></i>To: " . date('F j, Y', strtotime($row['ToDate'])) . "
                     </time>
                 </div>
                 <div class='postcard__bar'></div>
@@ -104,13 +104,13 @@ if ($result) {
                 <!-- Actions: Details, Students, Update -->
                 <ul class='postcard__tagbox'>
                     <li class='tag__item play blue'>
-                        <a href='../courses/courseDetails.php?id={$row['course_id']}'><i class='fas fa-play mr-2'></i>Details</a>
+                        <a href='../courses/courseDetails.php?id={$row['course_id']}'><i class='fas fa-play me-2'></i>Details</a>
                     </li>
                     <li class='tag__item play blue'>
-                        <a href='studentList.php?id={$row['course_id']}'><i class='fas fa-play mr-2'></i>Students</a>
+                        <a href='studentList.php?id={$row['course_id']}'><i class='fas fa-play me-2'></i>Students</a>
                     </li>
                     <li class='tag__item'>
-                        <a href='../courses/updateCourse.php?id={$row['course_id']}'><i class='fas fa-edit mr-2'></i>Update</a>
+                        <a href='../courses/updateCourse.php?id={$row['course_id']}'><i class='fas fa-edit me-2'></i>Update</a>
                     </li>
                 </ul>
             </div>
