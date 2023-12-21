@@ -286,7 +286,15 @@ mysqli_close($conn);
         }
         .profile-img{
             height: 400px;
+            width: 426px;
             margin-bottom: -40px;
+        }
+        .mid{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
         }
     }
 
@@ -318,8 +326,8 @@ mysqli_close($conn);
         <div class="row">
 
             <div class="col-xl-4 col-lg-8 col-md-8 col-sm-8  mb-2 d-flex justify-content-center flex-column container">
-                <div>
-                    <h1 class="fw-bold mb-4 text-center text-black">Welcome, <?= $user["firstName"] ?>.</h1>
+                <div class="mid">
+                    <h1 class="fw-bold mb-4 text-center text-black">Welcome, <span style=" color:#232389; "><?= $user["firstName"] ?>.</span></h1>
                     <img src="../assets/<?= $user['image'] ?>" alt="Profile Image" class="profile-img">
                 </div>
             </div>
@@ -327,11 +335,11 @@ mysqli_close($conn);
                 <div class="profile-section ">
                     <div class="pb-2 ">
                         <p>
-                        <h2>Thank you, <?= $user["firstName"] ?>!</h2>
+                        <h2 class="fw-bold">Thank you, <span style=" color:#232389; "><?= $user["firstName"] ?>!</h2>
                         </p>
                         <p class="px-3 pt-2">Welcome to our university tutoring community! We're thrilled to have you on board as a valuable member. Your profile information is provided below, and you can update it as needed. If you have any questions or concerns, feel free to reach out. Enjoy your time and academic journey with us!</p>
                     </div>
-                    <h2 class="mb-3">Profile Information</h2>
+                    <h3 class="mb-3 fw-bold">Profile Information</h3>
                     <ul>
                         <li><strong><i class="ri-user-line"></i> First Name:</strong> <?= $user["firstName"] ?></li>
                         <li><strong> <i class="ri-user-line"></i> Last Name:</strong> <?= $user["lastName"] ?></li>
@@ -339,7 +347,7 @@ mysqli_close($conn);
                         <li><strong><i class="ri-calendar-line"></i> Date of Birth:</strong> <?= $user["dateOfBirth"] ?></li>
                         <li><strong><i class="ri-phone-line"></i> Phone Number:</strong> <?= $user["phone_number"] ?></li>
                     </ul>
-                    <h3>Information</h3>
+                    <h3 class="fw-bold">About me</h3>
                     <p class="pb-4"><i class="ri-information-line"></i> <?= $user["profile_info"] ?></p>
                     <a href="update.php" class="btn btn-primary " style="position: absolute; bottom: 15px;">Update</a>
 
