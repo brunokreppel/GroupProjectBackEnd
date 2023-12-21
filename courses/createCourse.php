@@ -117,6 +117,7 @@ if (isset($_SESSION["ADM"]) || isset($_SESSION["TUTOR"])) {
 
             if (mysqli_query($conn, $sql)) {
                 $recordMessage = "Record added successfully";
+                header("refresh: 3; url= courses.php");
             } else {
                 $recordMessage = "Error adding record: " . mysqli_error($conn);
             }
