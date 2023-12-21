@@ -117,11 +117,7 @@ if (isset($_SESSION["ADM"]) || isset($_SESSION["TUTOR"])) {
 
             if (mysqli_query($conn, $sql)) {
                 $recordMessage = "Record added successfully";
-<<<<<<< HEAD
-                header("refresh: 2; url= courses.php");
-=======
                 header("refresh: 3; url= courses.php");
->>>>>>> a4ca0efbd51f1bb90cab98e1f97d771958c34163
             } else {
                 $recordMessage = "Error adding record: " . mysqli_error($conn);
             }
