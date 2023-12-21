@@ -7,6 +7,11 @@ $loc = "../";
 require_once '../components/db_Connect.php';
 require_once "../components/navbar.php";
 
+// if(!isset($_SESSION["ADM"])){
+//     header("Location: ../index.php");
+//     die();
+// }
+
 $sql = "SELECT * FROM `university`";
 $result = mysqli_query($conn, $sql);
 $universities = "";
