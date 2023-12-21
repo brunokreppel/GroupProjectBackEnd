@@ -163,6 +163,7 @@ if (isset($_SESSION["ADM"]) || isset($_SESSION["TUTOR"])) {
 
             if (mysqli_query($conn, $sql)) {
                 $recordMessage = "Record has been updated successfully";
+                header("refresh: 2; url= ../dashboard/dashboard.php");
             } else {
                 $recordMessage = "Error updating record: " . mysqli_error($conn);
             }
