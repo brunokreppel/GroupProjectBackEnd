@@ -165,6 +165,7 @@
                 <div class='alert alert-success' role='alert'>
                     User updated!
                 </div>";
+                header("refresh: 3; url= userProfile.php");
                 }
                 else{
                     echo "
