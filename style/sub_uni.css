@@ -93,18 +93,5 @@ summary:hover{
     color: darkred;
 }
 
-@media only screen and (max-width: 1024px) {
-    
-    .CstmContainer{
-        height: max-content;
-    }
 
-}
-
-@media only screen and (max-width: 768px) {
- 
-    .CstmContainer{
-        height: max-content;
-    }
-}
 
