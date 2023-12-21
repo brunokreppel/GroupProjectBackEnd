@@ -42,7 +42,9 @@ function check_course ($id, $user_id, $from_date, $to_date) {
         //
         // no courses exist for this tutor, everything okay
         //
-        $courses=true;
+        if ($courses == true) {
+            $courses=true;
+        }
         }
     else {
         //

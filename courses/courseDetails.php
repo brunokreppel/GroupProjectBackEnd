@@ -48,7 +48,9 @@ function check_booking ($user_id, $from_date, $to_date) {
         //
         // no bookings exist for this user, everything okay
         //
-        $bookings=true;
+        if ($bookings == true) {
+            $bookings=true;
+        }
         }
     else {
         //
