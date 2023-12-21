@@ -44,7 +44,7 @@ if ($result) {
                 " . $ratingStars ."
                 </div>
                 <h1 class='text-body-emphasis CstmH1'>{$row['subject_name']}</h1>
-                <p class='col-lg-8 mx-auto mb-4 fst-italic reviewP'>
+                <p class='col-lg-10 mx-auto mb-4 fst-italic reviewP overflow-scroll px-2'>
                     {$row['review_message']}
                 </p>
                 <div class='d-flex justify-content-center p-2'>
