@@ -81,7 +81,7 @@ mysqli_close($conn);
 
     <div class="container mb-5 mt-4">
         <h1 class="headerH1 pb-5">Subjects <i class="ri-book-open-line"></i></h1>
-        <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 rox-cols-lg-2 g-3">
+        <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-xl-2 g-3">
             
             <?= $subjects ?>    
             
